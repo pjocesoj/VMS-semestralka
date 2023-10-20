@@ -100,6 +100,8 @@ int main(void)
 	MX_USB_DEVICE_Init();
 	/* USER CODE BEGIN 2 */
 	Pin_struct LD9 = constructor(LD9_GPIO_Port, LD9_Pin);
+
+	defineKruh();
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -107,10 +109,8 @@ int main(void)
 	while (1)
 	{
 		/* USER CODE END WHILE */
-		pisPin(LD9, 1);
-		HAL_Delay(500);
-		pisPin(LD9, 0);
-		HAL_Delay(500);
+		otocKruhem(-1);
+		HAL_Delay(200);
 		/* USER CODE BEGIN 3 */
 	}
 	/* USER CODE END 3 */

@@ -1,3 +1,5 @@
 ../Helpers/helper.c:3:12:constructor	1
 ../Helpers/helper.c:12:6:pisPin	1
 ../Helpers/helper.c:16:7:ctiPin	1
+../Helpers/helper.c:23:6:defineKruh	1
+../Helpers/helper.c:35:6:otocKruhem	3

@@ -98,7 +98,7 @@ int main(void)
   MX_TIM17_Init();
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
-
+HAL_TIM_PWM_Start_IT(&htim17, TIM_CHANNEL_1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -106,10 +106,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-HAL_GPIO_WritePin(LD10_GPIO_Port, LD10_Pin, 1);
-HAL_Delay(500);
-HAL_GPIO_WritePin(LD10_GPIO_Port, LD10_Pin, 0);
-HAL_Delay(500);
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -315,9 +312,9 @@ static void MX_TIM17_Init(void)
 
   /* USER CODE END TIM17_Init 1 */
   htim17.Instance = TIM17;
-  htim17.Init.Prescaler = 1000;
+  htim17.Init.Prescaler = 48000;
   htim17.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim17.Init.Period = 48;
+  htim17.Init.Period = 100;
   htim17.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim17.Init.RepetitionCounter = 0;
   htim17.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
@@ -400,7 +397,20 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+int rychlost=100;
+void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
+{
+	HAL_GPIO_TogglePin(LD10_GPIO_Port, LD10_Pin);
+	if(rychlost<65000)
+	{
+		rychlost+=500;
+		__HAL_TIM_SET_PRESCALER(&htim17,rychlost);
+	}
+	else
+	{
+		HAL_GPIO_TogglePin(LD9_GPIO_Port, LD9_Pin);
+	}
+}
 /* USER CODE END 4 */
 
 /**

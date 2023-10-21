@@ -99,6 +99,7 @@ int main(void)
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
 HAL_TIM_PWM_Start_IT(&htim17, TIM_CHANNEL_1);
+__HAL_TIM_SET_COMPARE(&htim17,TIM_CHANNEL_1,800);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -314,7 +315,7 @@ static void MX_TIM17_Init(void)
   htim17.Instance = TIM17;
   htim17.Init.Prescaler = 48000;
   htim17.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim17.Init.Period = 100;
+  htim17.Init.Period = 1000;
   htim17.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim17.Init.RepetitionCounter = 0;
   htim17.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;

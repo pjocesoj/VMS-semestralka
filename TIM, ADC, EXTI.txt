@@ -1,0 +1,18 @@
+3 TIM
+      2 kanálový *Hz PWM (A počítá do 0, B do požadované)
+      1 kanálový 1Hz na vypsání změřených otáček
+      1 kanálový 1-100Hz blikající LED kruhem (perioda se mění podle změřených otáček)
+
+2 ADC
+      potenciometr
+      IR měřící otáčky
+
+přerušení
+      button      =změna směru
+      ADC2 ready  =přečtení IR
+      TIM2        =zobrazení otáček
+      TIM3        ="otočení" LED kruhem
+
+8 LED rozmístěných v kruhu pro grafické znázornění směru a rychlosti (součást vývojové desky)
+1 button na změnu směru (prohození counteru pro A-B)
+1 USB s CDC (communications device class) knihovnou

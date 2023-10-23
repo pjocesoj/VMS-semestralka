@@ -61,7 +61,8 @@ static void MX_TIM17_Init(void);
 static void MX_TIM16_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
-
+int tim17=0;
+int tim2=0;
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -71,6 +72,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim == &htim17)
 	{
 		HAL_GPIO_TogglePin(LD10_GPIO_Port, LD10_Pin);
+		tim17=HAL_GPIO_ReadPin(LD10_GPIO_Port, LD10_Pin);
 	}
 	if (htim == &htim16)
 	{
@@ -83,6 +85,8 @@ void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 	if(htim==&htim2)
 	{
 		HAL_GPIO_TogglePin(LD8_GPIO_Port, LD8_Pin);
+		tim2=HAL_GPIO_ReadPin(LD10_GPIO_Port, LD10_Pin);
+tim2+=3;
 	}
 }
 /* USER CODE END 0 */
@@ -128,7 +132,7 @@ int main(void)
 	HAL_TIM_Base_Start_IT(&htim17);
 	HAL_TIM_Base_Start_IT(&htim16);
 	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_2);
-	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);
+	//HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */

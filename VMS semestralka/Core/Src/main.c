@@ -82,11 +82,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 {
+	if(htim17.State!=HAL_TIM_STATE_BUSY)
+	{
+		HAL_TIM_Base_Start_IT(&htim17);
+		HAL_TIM_Base_Start_IT(&htim16);
+	}
 	if(htim==&htim2)
 	{
 		HAL_GPIO_TogglePin(LD8_GPIO_Port, LD8_Pin);
 		tim2=HAL_GPIO_ReadPin(LD10_GPIO_Port, LD10_Pin);
-tim2+=3;
+		tim2+=3;
 	}
 }
 /* USER CODE END 0 */
@@ -129,10 +134,15 @@ int main(void)
 	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_2,500);
 	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_4,250);
 
-	HAL_TIM_Base_Start_IT(&htim17);
-	HAL_TIM_Base_Start_IT(&htim16);
 	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_2);
 	//HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);
+
+	//HAL_TIM_Base_Start_IT(&htim17);
+	//HAL_TIM_Base_Start_IT(&htim16);
+
+	int apb1=HAL_RCC_GetPCLK1Freq();
+	int apb2=HAL_RCC_GetPCLK2Freq();
+
 	/* USER CODE END 2 */
 
 	/* Infinite loop */

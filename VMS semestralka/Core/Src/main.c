@@ -61,8 +61,11 @@ static void MX_TIM17_Init(void);
 static void MX_TIM16_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
-int tim17=0;
-int tim2=0;
+int tim17 = 0;
+int tim2_ch2 = 0;
+int tim2_ch4 = 0;
+
+int ch4_run=0;
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -72,7 +75,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim == &htim17)
 	{
 		HAL_GPIO_TogglePin(LD10_GPIO_Port, LD10_Pin);
-		tim17=HAL_GPIO_ReadPin(LD10_GPIO_Port, LD10_Pin);
+		tim17 = HAL_GPIO_ReadPin(LD10_GPIO_Port, LD10_Pin);
 	}
 	if (htim == &htim16)
 	{
@@ -82,18 +85,29 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 {
-	if(htim17.State!=HAL_TIM_STATE_BUSY)
+	/*if (htim17.State != HAL_TIM_STATE_BUSY)
 	{
 		HAL_TIM_Base_Start_IT(&htim17);
 		HAL_TIM_Base_Start_IT(&htim16);
-	}
-	if(htim==&htim2)
+	}*/
+	if(ch4_run==0){	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);ch4_run=1;}
+	if (htim == &htim2)
 	{
-		HAL_GPIO_TogglePin(LD8_GPIO_Port, LD8_Pin);
-		tim2=HAL_GPIO_ReadPin(LD10_GPIO_Port, LD10_Pin);
-		tim2+=3;
+		if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
+		{
+			HAL_GPIO_TogglePin(LD8_GPIO_Port, LD8_Pin);
+			tim2_ch2 = HAL_GPIO_ReadPin(LD8_GPIO_Port, LD8_Pin);
+			tim2_ch2 += 3;
+		}
+		if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4)
+		{
+			HAL_GPIO_TogglePin(LD6_GPIO_Port, LD6_Pin);
+			tim2_ch4 = HAL_GPIO_ReadPin(LD6_GPIO_Port, LD6_Pin);
+			tim2_ch4 += 6;
+		}
 	}
 }
+
 /* USER CODE END 0 */
 
 /**
@@ -137,11 +151,11 @@ int main(void)
 	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_2);
 	//HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);
 
-	//HAL_TIM_Base_Start_IT(&htim17);
-	//HAL_TIM_Base_Start_IT(&htim16);
+	HAL_TIM_Base_Start_IT(&htim17);
+	HAL_TIM_Base_Start_IT(&htim16);
 
-	int apb1=HAL_RCC_GetPCLK1Freq();
-	int apb2=HAL_RCC_GetPCLK2Freq();
+	int apb1 = HAL_RCC_GetPCLK1Freq();
+	int apb2 = HAL_RCC_GetPCLK2Freq();
 
 	/* USER CODE END 2 */
 
@@ -367,7 +381,7 @@ static void MX_TIM2_Init(void)
 
 	/* USER CODE END TIM2_Init 1 */
 	htim2.Instance = TIM2;
-	htim2.Init.Prescaler = 48000;
+	htim2.Init.Prescaler = 24000;
 	htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
 	htim2.Init.Period = 1000;
 	htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;

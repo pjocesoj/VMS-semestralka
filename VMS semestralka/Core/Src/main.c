@@ -87,6 +87,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 			HAL_GPIO_TogglePin(LD7_GPIO_Port, LD7_Pin);
 			tim2 = HAL_GPIO_ReadPin(LD7_GPIO_Port, LD7_Pin);
 			tim2+=9;
+
+			tim2_ch2 = 1+3;
+			tim2_ch4 = 1+6;
 		}
 }
 
@@ -103,14 +106,12 @@ void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 		if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
 		{
 			HAL_GPIO_TogglePin(LD8_GPIO_Port, LD8_Pin);
-			tim2_ch2 = HAL_GPIO_ReadPin(LD8_GPIO_Port, LD8_Pin);
-			tim2_ch2 += 3;
+			tim2_ch2 = 3;
 		}
 		if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4)
 		{
 			HAL_GPIO_TogglePin(LD6_GPIO_Port, LD6_Pin);
-			tim2_ch4 = HAL_GPIO_ReadPin(LD6_GPIO_Port, LD6_Pin);
-			tim2_ch4 += 6;
+			tim2_ch4 = 6;
 		}
 	}
 }

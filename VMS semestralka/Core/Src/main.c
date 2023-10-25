@@ -62,6 +62,7 @@ static void MX_TIM16_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 int tim17 = 0;
+int tim2=0;
 int tim2_ch2 = 0;
 int tim2_ch4 = 0;
 
@@ -81,6 +82,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	{
 		HAL_GPIO_TogglePin(LD9_GPIO_Port, LD9_Pin);
 	}
+	if (htim == &htim2)
+		{
+			HAL_GPIO_TogglePin(LD7_GPIO_Port, LD7_Pin);
+			tim2 = HAL_GPIO_ReadPin(LD7_GPIO_Port, LD7_Pin);
+			tim2+=9;
+		}
 }
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
@@ -153,6 +160,7 @@ int main(void)
 
 	HAL_TIM_Base_Start_IT(&htim17);
 	HAL_TIM_Base_Start_IT(&htim16);
+	HAL_TIM_Base_Start_IT(&htim2);
 
 	int apb1 = HAL_RCC_GetPCLK1Freq();
 	int apb2 = HAL_RCC_GetPCLK2Freq();
@@ -381,7 +389,7 @@ static void MX_TIM2_Init(void)
 
 	/* USER CODE END TIM2_Init 1 */
 	htim2.Instance = TIM2;
-	htim2.Init.Prescaler = 24000;
+	htim2.Init.Prescaler = 48000;
 	htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
 	htim2.Init.Period = 1000;
 	htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;

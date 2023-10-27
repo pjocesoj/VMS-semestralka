@@ -85,6 +85,7 @@ void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 		HAL_GPIO_TogglePin(LD8_GPIO_Port, LD8_Pin);
 	}
 }
+uint8_t adc_hod=0;
 /* USER CODE END 0 */
 
 /**
@@ -133,12 +134,15 @@ int main(void)
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
-	uint8_t adc_hod=0;
+	HAL_StatusTypeDef s=HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
+
+	uint8_t min=230;
+	uint8_t max=252;
 	while (1)
 	{
 		//ADC
 		HAL_ADC_Start(&hadc1);
-		if (HAL_ADC_PollForConversion(&hadc1, 5) == HAL_OK)
+		if (HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK)
 		{
 			adc_hod = HAL_ADC_GetValue(&hadc1);
 		}

@@ -1,10 +1,11 @@
 #MicroXplorer Configuration settings - do not modify
 ADC1.Channel-8\#ChannelRegularConversion=ADC_CHANNEL_2
-ADC1.IPParameters=Rank-8\#ChannelRegularConversion,master,Channel-8\#ChannelRegularConversion,SamplingTime-8\#ChannelRegularConversion,SamplingTimeOPAMP-8\#ChannelRegularConversion,OffsetNumber-8\#ChannelRegularConversion,Offset-8\#ChannelRegularConversion,NbrOfConversionFlag
+ADC1.IPParameters=Rank-8\#ChannelRegularConversion,master,Channel-8\#ChannelRegularConversion,SamplingTime-8\#ChannelRegularConversion,SamplingTimeOPAMP-8\#ChannelRegularConversion,OffsetNumber-8\#ChannelRegularConversion,Offset-8\#ChannelRegularConversion,NbrOfConversionFlag,Resolution
 ADC1.NbrOfConversionFlag=1
 ADC1.Offset-8\#ChannelRegularConversion=0
 ADC1.OffsetNumber-8\#ChannelRegularConversion=ADC_OFFSET_NONE
 ADC1.Rank-8\#ChannelRegularConversion=1
+ADC1.Resolution=ADC_RESOLUTION_8B
 ADC1.SamplingTime-8\#ChannelRegularConversion=ADC_SAMPLETIME_1CYCLE_5
 ADC1.SamplingTimeOPAMP-8\#ChannelRegularConversion=ADC_SAMPLETIME_19CYCLES_5
 ADC1.master=1
@@ -67,6 +68,7 @@ Mcu.UserConstants=
 Mcu.UserName=STM32F303VCTx
 MxCube.Version=6.9.1
 MxDb.Version=DB.6.0.91
+NVIC.ADC3_IRQn=true\:0\:0\:false\:false\:true\:true\:true\:true
 NVIC.BusFault_IRQn=true\:0\:0\:false\:false\:true\:true\:false\:false
 NVIC.DebugMonitor_IRQn=true\:0\:0\:false\:false\:true\:true\:false\:false
 NVIC.ForceEnableDMAVector=true

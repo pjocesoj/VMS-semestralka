@@ -1,5 +1,91 @@
 [
     {
+        "id": "cba1418529093267",
+        "type": "subflow",
+        "name": "less than",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 50,
+                "y": 30,
+                "wires": [
+                    {
+                        "id": "6919592d0786192a"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [
+            {
+                "name": "limit",
+                "type": "num",
+                "value": "1"
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "7ee3c2f805bf7276",
+        "type": "ui_led",
+        "z": "cba1418529093267",
+        "order": 3,
+        "group": "b37505736b6b9691",
+        "width": 0,
+        "height": 0,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "true",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "false",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 350,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "6919592d0786192a",
+        "type": "change",
+        "z": "cba1418529093267",
+        "name": "compare",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload<$env('limit')",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 180,
+        "y": 40,
+        "wires": [
+            [
+                "7ee3c2f805bf7276"
+            ]
+        ]
+    },
+    {
         "id": "8381c865.236028",
         "type": "subflow",
         "name": "Single value",
@@ -481,7 +567,9 @@
         "wires": [
             [
                 "616d654e3011a908",
-                "40081a9ba1b756ac"
+                "40081a9ba1b756ac",
+                "ddf5a4d0e8bc4bb2",
+                "117f76e8ba35b243"
             ]
         ]
     },
@@ -537,6 +625,58 @@
                 "b779f21953f93188"
             ]
         ]
+    },
+    {
+        "id": "ddf5a4d0e8bc4bb2",
+        "type": "function",
+        "z": "7b9ed63e.2138f8",
+        "name": "function 1",
+        "func": "var val=msg.payload\nvar b = val<230;\nreturn {payload:[val,b]};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 680,
+        "wires": [
+            [
+                "2b1260fa873de853"
+            ]
+        ]
+    },
+    {
+        "id": "2b1260fa873de853",
+        "type": "debug",
+        "z": "7b9ed63e.2138f8",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "117f76e8ba35b243",
+        "type": "subflow:cba1418529093267",
+        "z": "7b9ed63e.2138f8",
+        "name": "",
+        "env": [
+            {
+                "name": "limit",
+                "value": "230",
+                "type": "num"
+            }
+        ],
+        "x": 560,
+        "y": 740,
+        "wires": []
     },
     {
         "id": "40fc78b077e99904",

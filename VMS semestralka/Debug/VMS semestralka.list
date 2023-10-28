@@ -153,14 +153,14 @@ void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 08000234 <dutyCycle>:
 
 float p=0;
-uint16_t dutyCycle(uint8_t adc, uint16_t period)
+uint16_t dutyCycle(uint16_t adc, uint16_t period)
 {
  8000234:	b480      	push	{r7}
  8000236:	b087      	sub	sp, #28
  8000238:	af00      	add	r7, sp, #0
  800023a:	4603      	mov	r3, r0
  800023c:	460a      	mov	r2, r1
- 800023e:	71fb      	strb	r3, [r7, #7]
+ 800023e:	80fb      	strh	r3, [r7, #6]
  8000240:	4613      	mov	r3, r2
  8000242:	80bb      	strh	r3, [r7, #4]
 	uint8_t min=211;
@@ -173,7 +173,7 @@ uint16_t dutyCycle(uint8_t adc, uint16_t period)
  8000252:	eef8 7ae7 	vcvt.f32.s32	s15, s15
  8000256:	edc7 7a03 	vstr	s15, [r7, #12]
 	float val=adc-min;
- 800025a:	79fa      	ldrb	r2, [r7, #7]
+ 800025a:	88fa      	ldrh	r2, [r7, #6]
  800025c:	7cfb      	ldrb	r3, [r7, #19]
  800025e:	1ad3      	subs	r3, r2, r3
  8000260:	ee07 3a90 	vmov	s15, r3
@@ -315,16 +315,16 @@ int main(void)
  8000348:	480d      	ldr	r0, [pc, #52]	; (8000380 <main+0xac>)
  800034a:	f001 f91f 	bl	800158c <HAL_ADC_GetValue>
  800034e:	4603      	mov	r3, r0
- 8000350:	b2da      	uxtb	r2, r3
+ 8000350:	b29a      	uxth	r2, r3
  8000352:	4b0c      	ldr	r3, [pc, #48]	; (8000384 <main+0xb0>)
- 8000354:	701a      	strb	r2, [r3, #0]
+ 8000354:	801a      	strh	r2, [r3, #0]
 		}
 		HAL_ADC_Stop(&hadc1);
  8000356:	480a      	ldr	r0, [pc, #40]	; (8000380 <main+0xac>)
  8000358:	f000 ffe0 	bl	800131c <HAL_ADC_Stop>
 		duty=dutyCycle(adc_hod,1000);
  800035c:	4b09      	ldr	r3, [pc, #36]	; (8000384 <main+0xb0>)
- 800035e:	781b      	ldrb	r3, [r3, #0]
+ 800035e:	881b      	ldrh	r3, [r3, #0]
  8000360:	f44f 717a 	mov.w	r1, #1000	; 0x3e8
  8000364:	4618      	mov	r0, r3
  8000366:	f7ff ff65 	bl	8000234 <dutyCycle>

@@ -86,8 +86,11 @@ void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 	}
 }
 
+uint16_t adc_hod=0;
+uint16_t duty=0;
 float p=0;
-uint16_t dutyCycle(uint8_t adc, uint16_t period)
+
+uint16_t dutyCycle(uint16_t adc, uint16_t period)
 {
 	uint8_t min=211;
 	float max=255-min;
@@ -98,9 +101,6 @@ uint16_t dutyCycle(uint8_t adc, uint16_t period)
 	p=proc*100;
 	return proc*period;
 }
-
-uint8_t adc_hod=0;
-uint16_t duty=0;
 
 /* USER CODE END 0 */
 
@@ -152,8 +152,6 @@ int main(void)
 	/* USER CODE BEGIN WHILE */
 	//HAL_StatusTypeDef s=HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 
-	uint8_t min=230;
-	uint8_t max=252;
 	while (1)
 	{
 		//ADC

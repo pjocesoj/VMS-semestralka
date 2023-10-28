@@ -80,11 +80,28 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 {
-	if(htim==&htim2)
+	if (htim == &htim2)
 	{
 		HAL_GPIO_TogglePin(LD8_GPIO_Port, LD8_Pin);
 	}
 }
+
+float p=0;
+uint16_t dutyCycle(uint8_t adc, uint16_t period)
+{
+	uint8_t min=211;
+	float max=255-min;
+	float val=adc-min;
+	if(val<0){val=0;}
+
+	float proc=val/max;
+	p=proc*100;
+	return proc*period;
+}
+
+uint8_t adc_hod=0;
+uint16_t duty=0;
+
 /* USER CODE END 0 */
 
 /**
@@ -133,8 +150,20 @@ int main(void)
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
+	//HAL_StatusTypeDef s=HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
+
+	uint8_t min=230;
+	uint8_t max=252;
 	while (1)
 	{
+		//ADC
+		HAL_ADC_Start(&hadc1);
+		if (HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK)
+		{
+			adc_hod = HAL_ADC_GetValue(&hadc1);
+		}
+		HAL_ADC_Stop(&hadc1);
+		duty=dutyCycle(adc_hod,1000);
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
@@ -219,7 +248,7 @@ static void MX_ADC1_Init(void)
 	 */
 	hadc1.Instance = ADC1;
 	hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
-	hadc1.Init.Resolution = ADC_RESOLUTION_12B;
+	hadc1.Init.Resolution = ADC_RESOLUTION_8B;
 	hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
 	hadc1.Init.ContinuousConvMode = DISABLE;
 	hadc1.Init.DiscontinuousConvMode = DISABLE;

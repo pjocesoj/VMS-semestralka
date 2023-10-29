@@ -61,6 +61,13 @@ static void MX_TIM17_Init(void);
 static void MX_TIM16_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
+
+typedef enum
+{
+  DOLEVA	= -1,
+  DOPRAVA	= 1,
+} SmerOtaceni;
+
 int tim16 = 0;
 int tim17 = 0;
 int tim2=0;
@@ -71,6 +78,7 @@ uint8_t adc_hod=0;//ADC1 raw hodnota
 uint16_t duty=0;
 float p=0;//procenta (pro monitor)
 
+SmerOtaceni smer_otaceni=DOPRAVA;
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -111,13 +119,28 @@ uint16_t dutyCycle(uint8_t adc, uint16_t period)
 	uint8_t min=211;
 	float max=255-min;
 	float val=adc-min;
+
 	if(val<0){val=0;}
+	if(adc>=252){val=max;}//pri spatnem kontaktu nedosahne na max
 
 	float proc=val/max;
 	p=proc*100;
 	return proc*period;
 }
 
+void updateDuty(uint16_t duty)
+{
+	if(smer_otaceni==DOPRAVA)
+	{
+		__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_2,duty);
+		__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_4,0);
+	}
+	else
+	{
+		__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_2,0);
+		__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_4,duty);
+	}
+}
 /* USER CODE END 0 */
 
 /**
@@ -155,8 +178,6 @@ int main(void)
 	MX_TIM16_Init();
 	MX_TIM2_Init();
 	/* USER CODE BEGIN 2 */
-	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_2,500);
-	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_4,250);
 
 	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_2);
 	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);
@@ -178,6 +199,7 @@ int main(void)
 		}
 		HAL_ADC_Stop(&hadc1);
 		duty=dutyCycle(adc_hod,1000);
+		updateDuty(duty);
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */

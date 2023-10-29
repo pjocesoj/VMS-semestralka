@@ -78,7 +78,6 @@ uint8_t adc_hod = 0; //ADC1 raw hodnota
 uint16_t duty = 0;
 float p = 0; //procenta (pro monitor)
 
-GPIO_PinState B1_old=0;
 SmerOtaceni smer_otaceni = DOPRAVA;
 /* USER CODE END PFP */
 
@@ -168,7 +167,7 @@ void zmenSmer()
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-	B1_old=HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
+	GPIO_PinState B1_old=HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
 	if ( B1_old== 1)
 	{
 		zmenSmer();

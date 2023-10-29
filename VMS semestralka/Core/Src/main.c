@@ -61,6 +61,15 @@ static void MX_TIM17_Init(void);
 static void MX_TIM16_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
+int tim16 = 0;
+int tim17 = 0;
+int tim2=0;
+int tim2_ch2 = 0;
+int tim2_ch4 = 0;
+
+uint8_t adc_hod=0;//ADC1 raw hodnota
+uint16_t duty=0;
+float p=0;//procenta (pro monitor)
 
 /* USER CODE END PFP */
 
@@ -76,17 +85,27 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	{
 		HAL_GPIO_TogglePin(LD9_GPIO_Port, LD9_Pin);
 	}
-}
-
-void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
-{
 	if (htim == &htim2)
 	{
 		HAL_GPIO_TogglePin(LD8_GPIO_Port, LD8_Pin);
 	}
 }
 
-float p=0;
+void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
+{
+	if (htim == &htim2)
+	{
+		if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
+		{
+			HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
+		}
+		if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4)
+		{
+			HAL_GPIO_TogglePin(LD6_GPIO_Port, LD6_Pin);
+		}
+	}
+}
+
 uint16_t dutyCycle(uint8_t adc, uint16_t period)
 {
 	uint8_t min=211;
@@ -98,9 +117,6 @@ uint16_t dutyCycle(uint8_t adc, uint16_t period)
 	p=proc*100;
 	return proc*period;
 }
-
-uint8_t adc_hod=0;
-uint16_t duty=0;
 
 /* USER CODE END 0 */
 
@@ -142,21 +158,19 @@ int main(void)
 	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_2,500);
 	__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_4,250);
 
-	HAL_TIM_Base_Start_IT(&htim17);
-	HAL_TIM_Base_Start_IT(&htim16);
 	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_2);
 	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);
+	HAL_TIM_Base_Start_IT(&htim2);//pro kontrolu
+	HAL_TIM_Base_Start_IT(&htim17);
+	HAL_TIM_Base_Start_IT(&htim16);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	//HAL_StatusTypeDef s=HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 
-	uint8_t min=230;
-	uint8_t max=252;
 	while (1)
 	{
-		//ADC
 		HAL_ADC_Start(&hadc1);
 		if (HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK)
 		{

@@ -141,6 +141,13 @@ void updateDuty(uint16_t duty)
 		__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_4,duty);
 	}
 }
+void zmenSmer()
+{
+	if(smer_otaceni==DOPRAVA){smer_otaceni=DOLEVA;}
+	else{smer_otaceni=DOPRAVA;}
+
+	updateDuty(duty);
+}
 /* USER CODE END 0 */
 
 /**
@@ -200,6 +207,12 @@ int main(void)
 		HAL_ADC_Stop(&hadc1);
 		duty=dutyCycle(adc_hod,1000);
 		updateDuty(duty);
+
+		if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin)==1)
+		{
+			zmenSmer();
+		}
+
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */

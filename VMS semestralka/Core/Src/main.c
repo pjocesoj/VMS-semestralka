@@ -64,21 +64,21 @@ static void MX_TIM2_Init(void);
 
 typedef enum
 {
-  DOLEVA	= -1,
-  DOPRAVA	= 1,
+	DOLEVA = -1,
+	DOPRAVA = 1,
 } SmerOtaceni;
 
 int tim16 = 0;
 int tim17 = 0;
-int tim2=0;
+int tim2 = 0;
 int tim2_ch2 = 0;
 int tim2_ch4 = 0;
 
-uint8_t adc_hod=0;//ADC1 raw hodnota
-uint16_t duty=0;
-float p=0;//procenta (pro monitor)
+uint8_t adc_hod = 0; //ADC1 raw hodnota
+uint16_t duty = 0;
+float p = 0; //procenta (pro monitor)
 
-SmerOtaceni smer_otaceni=DOPRAVA;
+SmerOtaceni smer_otaceni = DOPRAVA;
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -88,6 +88,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim == &htim17)
 	{
 		HAL_GPIO_TogglePin(LD10_GPIO_Port, LD10_Pin);
+		tim17 = HAL_GPIO_ReadPin(LD10_GPIO_Port, LD10_Pin);
 	}
 	if (htim == &htim16)
 	{
@@ -96,6 +97,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim == &htim2)
 	{
 		HAL_GPIO_TogglePin(LD8_GPIO_Port, LD8_Pin);
+		tim2 = HAL_GPIO_ReadPin(LD8_GPIO_Port, LD8_Pin);
+		tim2 += 9;
+
+		HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
+		tim2_ch2 = 1 + 3;
+		HAL_GPIO_TogglePin(LD6_GPIO_Port, LD6_Pin);
+		tim2_ch4 = 1 + 6;
 	}
 }
 
@@ -106,31 +114,33 @@ void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 		if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
 		{
 			HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
+			tim2_ch2 = 3;
 		}
 		if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4)
 		{
 			HAL_GPIO_TogglePin(LD6_GPIO_Port, LD6_Pin);
+			tim2_ch4 = 6;
 		}
 	}
 }
 
 uint16_t dutyCycle(uint8_t adc, uint16_t period)
 {
-	uint8_t min=211;
-	float max=255-min;
-	float val=adc-min;
+	uint8_t min = 211;
+	float max = 255 - min;
+	float val = adc - min;
 
-	if(val<0){val=0;}
-	if(adc>=252){val=max;}//pri spatnem kontaktu nedosahne na max
+	if (val < 0){val = 0;}
+	if (adc >= 252){val = max;} //pri spatnem kontaktu nedosahne na max
 
-	float proc=val/max;
-	p=proc*100;
-	return proc*period;
+	float proc = val / max;
+	p = proc * 100;
+	return proc * period;
 }
 
 void updateDuty(uint16_t duty)
 {
-	if(smer_otaceni==DOPRAVA)
+	if (smer_otaceni == DOPRAVA)
 	{
 		__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_2,duty);
 		__HAL_TIM_SetCompare(&htim2,TIM_CHANNEL_4,0);
@@ -143,8 +153,14 @@ void updateDuty(uint16_t duty)
 }
 void zmenSmer()
 {
-	if(smer_otaceni==DOPRAVA){smer_otaceni=DOLEVA;}
-	else{smer_otaceni=DOPRAVA;}
+	if (smer_otaceni == DOPRAVA)
+	{
+		smer_otaceni = DOLEVA;
+	}
+	else
+	{
+		smer_otaceni = DOPRAVA;
+	}
 
 	updateDuty(duty);
 }
@@ -188,7 +204,7 @@ int main(void)
 
 	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_2);
 	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);
-	HAL_TIM_Base_Start_IT(&htim2);//pro kontrolu
+	HAL_TIM_Base_Start_IT(&htim2); //pro kontrolu
 	HAL_TIM_Base_Start_IT(&htim17);
 	HAL_TIM_Base_Start_IT(&htim16);
 	/* USER CODE END 2 */
@@ -196,7 +212,6 @@ int main(void)
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	//HAL_StatusTypeDef s=HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
-
 	while (1)
 	{
 		HAL_ADC_Start(&hadc1);
@@ -205,10 +220,10 @@ int main(void)
 			adc_hod = HAL_ADC_GetValue(&hadc1);
 		}
 		HAL_ADC_Stop(&hadc1);
-		duty=dutyCycle(adc_hod,1000);
+		duty = dutyCycle(adc_hod, 1000);
 		updateDuty(duty);
 
-		if(HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin)==1)
+		if (HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin) == 1)
 		{
 			zmenSmer();
 		}

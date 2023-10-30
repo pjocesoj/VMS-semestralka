@@ -173,6 +173,31 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 		zmenSmer();
 	}
 }
+
+void dec_ascii(uint16_t d, char ret[])
+{
+	uint16_t temp = d;
+	uint8_t a=0;
+
+	a=temp/1000;
+	ret[0]=a;
+	temp=temp-a*1000;
+
+	a=temp/100;
+	ret[1]=a;
+	temp=temp-a*100;
+
+	a=temp/10;
+	ret[2]=a;
+	temp=temp-a*10;
+
+	ret[3]=temp;
+
+	ret[0] += 48;//pricte 48(0 v ASCII)
+	ret[1] += 48;
+	ret[2] += 48;
+	ret[3] += 48;
+}
 /* USER CODE END 0 */
 
 /**
@@ -231,6 +256,12 @@ int main(void)
 		HAL_ADC_Stop(&hadc1);
 		duty = dutyCycle(adc_hod, 1000);
 		updateDuty(duty);
+
+		char bufferADC[4]={1,1,1,1};
+		dec_ascii(adc_hod, bufferADC);
+		uint8_t bufferADC_[6]={bufferADC[0],bufferADC[1],bufferADC[2],bufferADC[3],'\r','\n'};
+		//uint8_t bufferADC_[5]="ABC\r\n";
+		CDC_Transmit_FS(bufferADC_,strlen(bufferADC_));
 
     /* USER CODE END WHILE */
 

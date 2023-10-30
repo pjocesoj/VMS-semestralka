@@ -174,29 +174,22 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 	}
 }
 
-void dec_ascii(uint16_t d, char ret[])
+void dec_ascii(uint16_t dec, char ret[],uint8_t len)
 {
-	uint16_t temp = d;
+	uint16_t temp = dec;
 	uint8_t a=0;
+	uint16_t rad = 1;
 
-	a=temp/1000;
-	ret[0]=a;
-	temp=temp-a*1000;
+	for(int i=1;i<len;i++){rad*=10;}
 
-	a=temp/100;
-	ret[1]=a;
-	temp=temp-a*100;
+	for(uint8_t i=0;i<len;i++)
+	{
+		a=temp/rad;
+		ret[i]=a+48;//48 = '0' v ASCII
+		temp=temp-a*rad;
 
-	a=temp/10;
-	ret[2]=a;
-	temp=temp-a*10;
-
-	ret[3]=temp;
-
-	ret[0] += 48;//pricte 48(0 v ASCII)
-	ret[1] += 48;
-	ret[2] += 48;
-	ret[3] += 48;
+		rad/=10;
+	}
 }
 /* USER CODE END 0 */
 
@@ -258,7 +251,7 @@ int main(void)
 		updateDuty(duty);
 
 		char bufferADC[4]={1,1,1,1};
-		dec_ascii(adc_hod, bufferADC);
+		dec_ascii(adc_hod, bufferADC,4);
 		uint8_t bufferADC_[6]={bufferADC[0],bufferADC[1],bufferADC[2],bufferADC[3],'\r','\n'};
 		//uint8_t bufferADC_[5]="ABC\r\n";
 		CDC_Transmit_FS(bufferADC_,strlen(bufferADC_));

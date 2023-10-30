@@ -191,6 +191,16 @@ void dec_ascii(uint16_t dec, char ret[],uint8_t len)
 		rad/=10;
 	}
 }
+
+uint8_t adc_comp=0;
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+{
+	if(hadc==&hadc3)
+	{
+		HAL_GPIO_TogglePin(LD5_GPIO_Port, LD5_Pin);
+		adc_comp = HAL_GPIO_ReadPin(LD5_GPIO_Port, LD5_Pin)+12;
+	}
+}
 /* USER CODE END 0 */
 
 /**
@@ -234,6 +244,8 @@ int main(void)
 	HAL_TIM_Base_Start_IT(&htim2); //pro kontrolu
 	HAL_TIM_Base_Start_IT(&htim17);
 	HAL_TIM_Base_Start_IT(&htim16);
+
+	HAL_ADC_Start_IT(&hadc3);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -403,7 +415,7 @@ static void MX_ADC3_Init(void)
   hadc3.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1;
   hadc3.Init.Resolution = ADC_RESOLUTION_12B;
   hadc3.Init.ScanConvMode = ADC_SCAN_DISABLE;
-  hadc3.Init.ContinuousConvMode = DISABLE;
+  hadc3.Init.ContinuousConvMode = ENABLE;
   hadc3.Init.DiscontinuousConvMode = DISABLE;
   hadc3.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
   hadc3.Init.ExternalTrigConv = ADC_SOFTWARE_START;

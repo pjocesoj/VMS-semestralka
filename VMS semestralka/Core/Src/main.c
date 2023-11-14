@@ -74,6 +74,11 @@ int tim2 = 0;
 int tim2_ch2 = 0;
 int tim2_ch4 = 0;
 
+uint8_t adc_comp=0;
+uint16_t puls_old=0;
+uint16_t pulsu=0;
+uint16_t RPM=0;
+
 uint8_t adc_hod = 0; //ADC1 raw hodnota
 uint16_t duty = 0;
 float p = 0; //procenta (pro monitor)
@@ -93,6 +98,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim == &htim16)
 	{
 		HAL_GPIO_TogglePin(LD9_GPIO_Port, LD9_Pin);
+
+		RPM=pulsu;
+		pulsu=0;
 	}
 	if (htim == &htim2)
 	{
@@ -192,13 +200,17 @@ void dec_ascii(uint16_t dec, char ret[],uint8_t len)
 	}
 }
 
-uint8_t adc_comp=0;
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
 	if(hadc==&hadc3)
 	{
 		HAL_GPIO_TogglePin(LD5_GPIO_Port, LD5_Pin);
 		adc_comp = HAL_GPIO_ReadPin(LD5_GPIO_Port, LD5_Pin)+12;
+
+		uint16_t puls_new=HAL_ADC_GetValue(&hadc3);
+		puls_old=puls_new;
+
+		pulsu++;
 	}
 }
 /* USER CODE END 0 */

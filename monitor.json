@@ -1,206 +1,31 @@
 [
     {
-        "id": "c7a7489d8cc90f4a",
+        "id": "f9d1d6be5618b340",
         "type": "subflow",
-        "name": "smer kontrola",
+        "name": "potenciometr",
         "info": "",
         "category": "",
         "in": [
             {
                 "x": 60,
-                "y": 200,
-                "wires": [
-                    {
-                        "id": "d153a2142afde8f2"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [],
-        "meta": {},
-        "color": "#DDAA99"
-    },
-    {
-        "id": "d153a2142afde8f2",
-        "type": "processing",
-        "z": "c7a7489d8cc90f4a",
-        "groupname": "smer",
-        "groupid": "5033f5652a3c8030",
-        "expressions": [],
-        "statistics": [],
-        "logmode": "no",
-        "logformat": "stcm",
-        "x": 190,
-        "y": 200,
-        "wires": [
-            [
-                "50abf20e01824207"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "50abf20e01824207",
-        "type": "subflow:8381c865.236028",
-        "z": "c7a7489d8cc90f4a",
-        "name": "smer",
-        "env": [
-            {
-                "name": "varfilter",
-                "value": "smer_otaceni",
-                "type": "str"
-            }
-        ],
-        "x": 310,
-        "y": 160,
-        "wires": [
-            [
-                "9260da3ed3c412d4",
-                "2d9c86d6c7e42807"
-            ]
-        ]
-    },
-    {
-        "id": "99e714259bb6e13a",
-        "type": "ui_led",
-        "z": "c7a7489d8cc90f4a",
-        "order": 1,
-        "group": "e336281c0ce60bce",
-        "width": 2,
-        "height": 3,
-        "label": "",
-        "labelPlacement": "left",
-        "labelAlignment": "left",
-        "colorForValue": [
-            {
-                "color": "#ff0000",
-                "value": "false",
-                "valueType": "bool"
-            },
-            {
-                "color": "#008000",
-                "value": "true",
-                "valueType": "bool"
-            }
-        ],
-        "allowColorForValueInMessage": false,
-        "shape": "circle",
-        "showGlow": true,
-        "name": "",
-        "x": 750,
-        "y": 160,
-        "wires": []
-    },
-    {
-        "id": "9260da3ed3c412d4",
-        "type": "function",
-        "z": "c7a7489d8cc90f4a",
-        "name": "smer otaceni",
-        "func": "var val=msg.payload\nif (val == 1) { return { payload: true }; }\nelse { return { payload: false }; }",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 530,
-        "y": 160,
-        "wires": [
-            [
-                "99e714259bb6e13a"
-            ]
-        ]
-    },
-    {
-        "id": "2d9c86d6c7e42807",
-        "type": "ui_chart",
-        "z": "c7a7489d8cc90f4a",
-        "name": "",
-        "group": "e336281c0ce60bce",
-        "order": 2,
-        "width": 13,
-        "height": 3,
-        "label": "chart",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": false,
-        "ymin": "",
-        "ymax": "",
-        "removeOlder": 1,
-        "removeOlderPoints": "",
-        "removeOlderUnit": "3600",
-        "cutout": 0,
-        "useOneColor": false,
-        "useUTC": false,
-        "colors": [
-            "#1f77b4",
-            "#aec7e8",
-            "#ff7f0e",
-            "#2ca02c",
-            "#98df8a",
-            "#d62728",
-            "#ff9896",
-            "#9467bd",
-            "#c5b0d5"
-        ],
-        "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 730,
-        "y": 220,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "655344caf4b7d3f6",
-        "type": "ui_spacer",
-        "z": "c7a7489d8cc90f4a",
-        "name": "spacer",
-        "group": "b37505736b6b9691",
-        "order": 4,
-        "width": 1,
-        "height": 1
-    },
-    {
-        "id": "e336281c0ce60bce",
-        "type": "ui_group",
-        "name": "smer",
-        "tab": "17d09b07.741a55",
-        "order": 3,
-        "disp": true,
-        "width": "15",
-        "collapse": true,
-        "className": ""
-    },
-    {
-        "id": "542312ab8bae29d0",
-        "type": "subflow",
-        "name": "start stop",
-        "info": "",
-        "category": "",
-        "in": [],
-        "out": [
-            {
-                "x": 400,
                 "y": 80,
                 "wires": [
                     {
-                        "id": "5fd51c96.2330e4",
-                        "port": 0
+                        "id": "758d917489fd5c05"
+                    },
+                    {
+                        "id": "a622a7a864599b08"
                     }
                 ]
-            },
+            }
+        ],
+        "out": [
             {
-                "x": 400,
-                "y": 160,
+                "x": 340,
+                "y": 220,
                 "wires": [
                     {
-                        "id": "52eadfe3.2c8cc",
+                        "id": "758d917489fd5c05",
                         "port": 0
                     }
                 ]
@@ -208,98 +33,66 @@
         ],
         "env": [],
         "meta": {},
-        "color": "#DDAA99",
-        "icon": "font-awesome/fa-flag-checkered"
-    },
-    {
-        "id": "5fd51c96.2330e4",
-        "type": "ui_button",
-        "z": "542312ab8bae29d0",
-        "name": "",
-        "group": "b37505736b6b9691",
-        "order": 1,
-        "width": 5,
-        "height": 1,
-        "passthru": false,
-        "label": "START Acquisition",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "start",
-        "topicType": "str",
-        "x": 230,
-        "y": 80,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "52eadfe3.2c8cc",
-        "type": "ui_button",
-        "z": "542312ab8bae29d0",
-        "name": "",
-        "group": "b37505736b6b9691",
-        "order": 2,
-        "width": 5,
-        "height": 1,
-        "passthru": true,
-        "label": "STOP Acquisition",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "",
-        "payloadType": "str",
-        "topic": "stop",
-        "topicType": "str",
-        "x": 230,
-        "y": 160,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "cba1418529093267",
-        "type": "subflow",
-        "name": "less than",
-        "info": "",
-        "category": "",
-        "in": [
-            {
-                "x": 50,
-                "y": 30,
-                "wires": [
-                    {
-                        "id": "6919592d0786192a"
-                    }
-                ]
-            }
-        ],
-        "out": [],
-        "env": [
-            {
-                "name": "limit",
-                "type": "num",
-                "value": "1"
-            }
-        ],
-        "meta": {},
         "color": "#DDAA99"
     },
     {
-        "id": "7ee3c2f805bf7276",
+        "id": "616d654e3011a908",
+        "type": "ui_gauge",
+        "z": "f9d1d6be5618b340",
+        "name": "adc",
+        "group": "a1f216f25d7d2bde",
+        "order": 1,
+        "width": 6,
+        "height": 4,
+        "gtype": "gage",
+        "title": "ADC",
+        "label": "units",
+        "format": "{{value}}",
+        "min": "210",
+        "max": "255",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 530,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "758d917489fd5c05",
+        "type": "subflow:8381c865.236028",
+        "z": "f9d1d6be5618b340",
+        "name": "adc_val",
+        "env": [
+            {
+                "name": "varfilter",
+                "value": "adc_hod",
+                "type": "str"
+            }
+        ],
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [
+                "616d654e3011a908",
+                "40081a9ba1b756ac"
+            ]
+        ]
+    },
+    {
+        "id": "b779f21953f93188",
         "type": "ui_led",
-        "z": "cba1418529093267",
-        "order": 3,
-        "group": "b37505736b6b9691",
-        "width": 4,
-        "height": 1,
-        "label": "",
+        "z": "f9d1d6be5618b340",
+        "order": 2,
+        "group": "a1f216f25d7d2bde",
+        "width": 3,
+        "height": 4,
+        "label": "error",
         "labelPlacement": "left",
         "labelAlignment": "left",
         "colorForValue": [
@@ -307,32 +100,27 @@
                 "color": "#ff0000",
                 "value": "true",
                 "valueType": "bool"
-            },
-            {
-                "color": "#008000",
-                "value": "false",
-                "valueType": "bool"
             }
         ],
         "allowColorForValueInMessage": false,
         "shape": "circle",
         "showGlow": true,
         "name": "",
-        "x": 350,
-        "y": 40,
+        "x": 530,
+        "y": 140,
         "wires": []
     },
     {
-        "id": "6919592d0786192a",
+        "id": "40081a9ba1b756ac",
         "type": "change",
-        "z": "cba1418529093267",
+        "z": "f9d1d6be5618b340",
         "name": "compare",
         "rules": [
             {
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "msg.payload<$env('limit')",
+                "to": "msg.payload<211",
                 "tot": "jsonata"
             }
         ],
@@ -341,32 +129,72 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 180,
-        "y": 40,
+        "x": 400,
+        "y": 140,
         "wires": [
             [
-                "7ee3c2f805bf7276"
+                "b779f21953f93188"
             ]
         ]
     },
     {
-        "id": "b37505736b6b9691",
+        "id": "aa04105cada09d41",
+        "type": "ui_gauge",
+        "z": "f9d1d6be5618b340",
+        "name": "proc",
+        "group": "a1f216f25d7d2bde",
+        "order": 3,
+        "width": 6,
+        "height": 4,
+        "gtype": "gage",
+        "title": "potenciometr",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 530,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "a622a7a864599b08",
+        "type": "subflow:8381c865.236028",
+        "z": "f9d1d6be5618b340",
+        "name": "pr",
+        "env": [
+            {
+                "name": "varfilter",
+                "value": "p",
+                "type": "str"
+            }
+        ],
+        "x": 190,
+        "y": 40,
+        "wires": [
+            [
+                "aa04105cada09d41"
+            ]
+        ]
+    },
+    {
+        "id": "a1f216f25d7d2bde",
         "type": "ui_group",
-        "name": "buttons",
+        "name": "budiky",
         "tab": "17d09b07.741a55",
-        "order": 1,
-        "disp": false,
+        "order": 5,
+        "disp": true,
         "width": "15",
         "collapse": false,
         "className": ""
-    },
-    {
-        "id": "17d09b07.741a55",
-        "type": "ui_tab",
-        "name": "Home",
-        "icon": "dashboard",
-        "disabled": false,
-        "hidden": false
     },
     {
         "id": "8381c865.236028",
@@ -539,6 +367,359 @@
         ]
     },
     {
+        "id": "c7a7489d8cc90f4a",
+        "type": "subflow",
+        "name": "smer kontrola",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 200,
+                "wires": [
+                    {
+                        "id": "d153a2142afde8f2"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "d153a2142afde8f2",
+        "type": "processing",
+        "z": "c7a7489d8cc90f4a",
+        "groupname": "smer",
+        "groupid": "5033f5652a3c8030",
+        "expressions": [],
+        "statistics": [],
+        "logmode": "no",
+        "logformat": "stcm",
+        "x": 190,
+        "y": 200,
+        "wires": [
+            [
+                "50abf20e01824207"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "50abf20e01824207",
+        "type": "subflow:8381c865.236028",
+        "z": "c7a7489d8cc90f4a",
+        "name": "smer",
+        "env": [
+            {
+                "name": "varfilter",
+                "value": "smer_otaceni",
+                "type": "str"
+            }
+        ],
+        "x": 310,
+        "y": 160,
+        "wires": [
+            [
+                "9260da3ed3c412d4",
+                "2d9c86d6c7e42807"
+            ]
+        ]
+    },
+    {
+        "id": "99e714259bb6e13a",
+        "type": "ui_led",
+        "z": "c7a7489d8cc90f4a",
+        "order": 1,
+        "group": "e336281c0ce60bce",
+        "width": 2,
+        "height": 3,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 750,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "9260da3ed3c412d4",
+        "type": "function",
+        "z": "c7a7489d8cc90f4a",
+        "name": "smer otaceni",
+        "func": "var val=msg.payload\nif (val == 1) { return { payload: true }; }\nelse { return { payload: false }; }",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 160,
+        "wires": [
+            [
+                "99e714259bb6e13a"
+            ]
+        ]
+    },
+    {
+        "id": "2d9c86d6c7e42807",
+        "type": "ui_chart",
+        "z": "c7a7489d8cc90f4a",
+        "name": "",
+        "group": "e336281c0ce60bce",
+        "order": 2,
+        "width": 13,
+        "height": 3,
+        "label": "chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 730,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e336281c0ce60bce",
+        "type": "ui_group",
+        "name": "smer",
+        "tab": "17d09b07.741a55",
+        "order": 3,
+        "disp": true,
+        "width": "15",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "542312ab8bae29d0",
+        "type": "subflow",
+        "name": "start stop",
+        "info": "",
+        "category": "",
+        "in": [],
+        "out": [
+            {
+                "x": 400,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "5fd51c96.2330e4",
+                        "port": 0
+                    },
+                    {
+                        "id": "52eadfe3.2c8cc",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99",
+        "icon": "font-awesome/fa-flag-checkered"
+    },
+    {
+        "id": "5fd51c96.2330e4",
+        "type": "ui_button",
+        "z": "542312ab8bae29d0",
+        "name": "",
+        "group": "b37505736b6b9691",
+        "order": 1,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "label": "START Acquisition",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "start",
+        "topicType": "str",
+        "x": 230,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "52eadfe3.2c8cc",
+        "type": "ui_button",
+        "z": "542312ab8bae29d0",
+        "name": "",
+        "group": "b37505736b6b9691",
+        "order": 2,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "label": "STOP Acquisition",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "stop",
+        "topicType": "str",
+        "x": 230,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cba1418529093267",
+        "type": "subflow",
+        "name": "less than",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 50,
+                "y": 30,
+                "wires": [
+                    {
+                        "id": "6919592d0786192a"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [
+            {
+                "name": "limit",
+                "type": "num",
+                "value": "1"
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "7ee3c2f805bf7276",
+        "type": "ui_led",
+        "z": "cba1418529093267",
+        "order": 3,
+        "group": "b37505736b6b9691",
+        "width": 4,
+        "height": 1,
+        "label": "",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#ff0000",
+                "value": "true",
+                "valueType": "bool"
+            },
+            {
+                "color": "#008000",
+                "value": "false",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 350,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "6919592d0786192a",
+        "type": "change",
+        "z": "cba1418529093267",
+        "name": "compare",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "msg.payload<$env('limit')",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 180,
+        "y": 40,
+        "wires": [
+            [
+                "7ee3c2f805bf7276"
+            ]
+        ]
+    },
+    {
+        "id": "b37505736b6b9691",
+        "type": "ui_group",
+        "name": "buttons",
+        "tab": "17d09b07.741a55",
+        "order": 1,
+        "disp": false,
+        "width": "15",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "17d09b07.741a55",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
         "id": "7b9ed63e.2138f8",
         "type": "tab",
         "label": "Basic_Flow",
@@ -560,10 +741,10 @@
         "frequencyType": "0",
         "snapshotheader": "",
         "mode": "direct",
-        "lastImportedTime": 1698581379959,
+        "lastImportedTime": 1699973461184,
         "openStatus": true,
-        "x": 310,
-        "y": 120,
+        "x": 350,
+        "y": 20,
         "wires": [
             [
                 "819fb76c405bf92d"
@@ -578,8 +759,8 @@
         "group": "f9c34dde.1e2f4",
         "name": "timers",
         "order": 1,
-        "width": "0",
-        "height": "0",
+        "width": 0,
+        "height": 0,
         "chartType": "line",
         "curveType": "linear",
         "duration": "10",
@@ -595,8 +776,8 @@
         "z": "7b9ed63e.2138f8",
         "name": "F3",
         "probeconfig": "acc12acd3c9c072c",
-        "x": 710,
-        "y": 120,
+        "x": 630,
+        "y": 80,
         "wires": []
     },
     {
@@ -625,12 +806,12 @@
         "name": "F3-in",
         "probeconfig": "acc12acd3c9c072c",
         "x": 70,
-        "y": 340,
+        "y": 320,
         "wires": [
             [
                 "011e8eafe47c7599",
-                "f206c2d53621614f",
-                "de7fea62458850e9"
+                "de7fea62458850e9",
+                "f206c2d53621614f"
             ],
             []
         ]
@@ -650,10 +831,10 @@
         "frequencyType": "0",
         "snapshotheader": "",
         "mode": "direct",
-        "lastImportedTime": 1698582263092,
+        "lastImportedTime": 1699973468999,
         "openStatus": true,
-        "x": 310,
-        "y": 180,
+        "x": 350,
+        "y": 80,
         "wires": [
             [
                 "819fb76c405bf92d"
@@ -676,181 +857,8 @@
         "ymin": "",
         "ymax": "",
         "x": 690,
-        "y": 420,
+        "y": 380,
         "wires": []
-    },
-    {
-        "id": "f206c2d53621614f",
-        "type": "processing",
-        "z": "7b9ed63e.2138f8",
-        "groupname": "ADC",
-        "groupid": "c3b02f31702b9663",
-        "expressions": [],
-        "statistics": [],
-        "logmode": "no",
-        "logformat": "stcm",
-        "x": 290,
-        "y": 420,
-        "wires": [
-            [
-                "0f05c350a75174d3",
-                "feab7a297bb0abad",
-                "758d917489fd5c05"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "4c010e690981bdb2",
-        "type": "ui_gauge",
-        "z": "7b9ed63e.2138f8",
-        "name": "proc",
-        "group": "a1f216f25d7d2bde",
-        "order": 3,
-        "width": 6,
-        "height": 4,
-        "gtype": "gage",
-        "title": "potenciometr",
-        "label": "%",
-        "format": "{{value}}",
-        "min": 0,
-        "max": "100",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 670,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "feab7a297bb0abad",
-        "type": "subflow:8381c865.236028",
-        "z": "7b9ed63e.2138f8",
-        "name": "pr",
-        "env": [
-            {
-                "name": "varfilter",
-                "value": "p",
-                "type": "str"
-            }
-        ],
-        "x": 490,
-        "y": 500,
-        "wires": [
-            [
-                "4c010e690981bdb2"
-            ]
-        ]
-    },
-    {
-        "id": "616d654e3011a908",
-        "type": "ui_gauge",
-        "z": "7b9ed63e.2138f8",
-        "name": "adc",
-        "group": "a1f216f25d7d2bde",
-        "order": 1,
-        "width": 6,
-        "height": 4,
-        "gtype": "gage",
-        "title": "ADC",
-        "label": "units",
-        "format": "{{value}}",
-        "min": "210",
-        "max": "255",
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "",
-        "seg2": "",
-        "diff": false,
-        "className": "",
-        "x": 670,
-        "y": 560,
-        "wires": []
-    },
-    {
-        "id": "758d917489fd5c05",
-        "type": "subflow:8381c865.236028",
-        "z": "7b9ed63e.2138f8",
-        "name": "adc_val",
-        "env": [
-            {
-                "name": "varfilter",
-                "value": "adc_hod",
-                "type": "str"
-            }
-        ],
-        "x": 500,
-        "y": 560,
-        "wires": [
-            [
-                "616d654e3011a908",
-                "40081a9ba1b756ac",
-                "ddf5a4d0e8bc4bb2",
-                "117f76e8ba35b243"
-            ]
-        ]
-    },
-    {
-        "id": "b779f21953f93188",
-        "type": "ui_led",
-        "z": "7b9ed63e.2138f8",
-        "order": 2,
-        "group": "a1f216f25d7d2bde",
-        "width": 3,
-        "height": 4,
-        "label": "error",
-        "labelPlacement": "left",
-        "labelAlignment": "left",
-        "colorForValue": [
-            {
-                "color": "#ff0000",
-                "value": "true",
-                "valueType": "bool"
-            }
-        ],
-        "allowColorForValueInMessage": false,
-        "shape": "circle",
-        "showGlow": true,
-        "name": "",
-        "x": 910,
-        "y": 620,
-        "wires": []
-    },
-    {
-        "id": "40081a9ba1b756ac",
-        "type": "change",
-        "z": "7b9ed63e.2138f8",
-        "name": "compare",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "msg.payload<211",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 700,
-        "y": 620,
-        "wires": [
-            [
-                "b779f21953f93188"
-            ]
-        ]
     },
     {
         "id": "ddf5a4d0e8bc4bb2",
@@ -865,7 +873,7 @@
         "finalize": "",
         "libs": [],
         "x": 700,
-        "y": 680,
+        "y": 420,
         "wires": [
             [
                 "2b1260fa873de853"
@@ -885,7 +893,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 840,
-        "y": 680,
+        "y": 420,
         "wires": []
     },
     {
@@ -900,22 +908,17 @@
                 "type": "num"
             }
         ],
-        "x": 560,
-        "y": 740,
+        "x": 700,
+        "y": 460,
         "wires": []
     },
     {
         "id": "397ccca08f14196b",
         "type": "subflow:542312ab8bae29d0",
         "z": "7b9ed63e.2138f8",
-        "x": 120,
-        "y": 160,
+        "x": 180,
+        "y": 80,
         "wires": [
-            [
-                "d59587ff.cd1748",
-                "c3b02f31702b9663",
-                "5033f5652a3c8030"
-            ],
             [
                 "d59587ff.cd1748",
                 "c3b02f31702b9663",
@@ -932,16 +935,16 @@
         "execonfig": "6abe42b859792b92",
         "variablelist": [],
         "triggerstartmode": "manual",
-        "triggername": "B1_old",
+        "triggername": "smer_otaceni",
         "triggerthreshold": "",
         "frequency": "",
         "frequencyType": "0",
         "snapshotheader": "",
         "mode": "direct",
-        "lastImportedTime": 1698582305143,
+        "lastImportedTime": 1699973475910,
         "openStatus": false,
-        "x": 310,
-        "y": 240,
+        "x": 350,
+        "y": 140,
         "wires": [
             [
                 "819fb76c405bf92d"
@@ -953,9 +956,52 @@
         "id": "de7fea62458850e9",
         "type": "subflow:c7a7489d8cc90f4a",
         "z": "7b9ed63e.2138f8",
-        "x": 240,
-        "y": 600,
+        "x": 320,
+        "y": 460,
         "wires": []
+    },
+    {
+        "id": "f206c2d53621614f",
+        "type": "processing",
+        "z": "7b9ed63e.2138f8",
+        "groupname": "ADC",
+        "groupid": "c3b02f31702b9663",
+        "expressions": [],
+        "statistics": [],
+        "logmode": "no",
+        "logformat": "stcm",
+        "x": 290,
+        "y": 380,
+        "wires": [
+            [
+                "0f05c350a75174d3",
+                "66cb05624929035e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "66cb05624929035e",
+        "type": "subflow:f9d1d6be5618b340",
+        "z": "7b9ed63e.2138f8",
+        "x": 490,
+        "y": 420,
+        "wires": [
+            [
+                "ddf5a4d0e8bc4bb2",
+                "117f76e8ba35b243"
+            ]
+        ]
+    },
+    {
+        "id": "e4efd15ae69c1b88",
+        "type": "ui_spacer",
+        "z": "7b9ed63e.2138f8",
+        "name": "spacer",
+        "group": "b37505736b6b9691",
+        "order": 4,
+        "width": 1,
+        "height": 1
     },
     {
         "id": "be2ea073ff51204a",
@@ -970,19 +1016,19 @@
                 "type": 1
             },
             {
-                "address": "0x0800badc",
+                "address": "0x0800bce4",
                 "name": "AHBPrescTable[0]",
                 "type": 1,
                 "checked": false
             },
             {
-                "address": "0x0800baec",
+                "address": "0x0800bcf4",
                 "name": "aPLLMULFactorTable[0]",
                 "type": 1,
                 "checked": false
             },
             {
-                "address": "0x0800bafc",
+                "address": "0x0800bd04",
                 "name": "aPredivFactorTable[0]",
                 "type": 1,
                 "checked": false
@@ -2247,8 +2293,8 @@
         ],
         "expand": false,
         "filename": "VMS semestralka.elf",
-        "exeModifiedTime": 1698581349134,
-        "configLastUpdate": 1698581379610
+        "exeModifiedTime": 1699973399693,
+        "configLastUpdate": 1699973460836
     },
     {
         "id": "f9c34dde.1e2f4",
@@ -2287,19 +2333,19 @@
                 "checked": true
             },
             {
-                "address": "0x0800badc",
+                "address": "0x0800bce4",
                 "name": "AHBPrescTable[0]",
                 "type": 1,
                 "checked": false
             },
             {
-                "address": "0x0800baec",
+                "address": "0x0800bcf4",
                 "name": "aPLLMULFactorTable[0]",
                 "type": 1,
                 "checked": false
             },
             {
-                "address": "0x0800bafc",
+                "address": "0x0800bd04",
                 "name": "aPredivFactorTable[0]",
                 "type": 1,
                 "checked": false
@@ -3562,8 +3608,8 @@
         ],
         "expand": false,
         "filename": "VMS semestralka.elf",
-        "exeModifiedTime": 1698581349134,
-        "configLastUpdate": 1698581657197
+        "exeModifiedTime": 1699973399693,
+        "configLastUpdate": 1699973468656
     },
     {
         "id": "a8fb4601751b9315",
@@ -3574,17 +3620,6 @@
         "disp": true,
         "width": "15",
         "collapse": true,
-        "className": ""
-    },
-    {
-        "id": "a1f216f25d7d2bde",
-        "type": "ui_group",
-        "name": "budiky",
-        "tab": "17d09b07.741a55",
-        "order": 5,
-        "disp": true,
-        "width": "15",
-        "collapse": false,
         "className": ""
     },
     {
@@ -3600,25 +3635,19 @@
                 "type": 1
             },
             {
-                "address": "0x0800bb4c",
+                "address": "0x0800bce4",
                 "name": "AHBPrescTable[0]",
                 "type": 1
             },
             {
-                "address": "0x0800bb5c",
+                "address": "0x0800bcf4",
                 "name": "aPLLMULFactorTable[0]",
                 "type": 1
             },
             {
-                "address": "0x0800bb6c",
+                "address": "0x0800bd04",
                 "name": "aPredivFactorTable[0]",
                 "type": 1
-            },
-            {
-                "address": "0x20000338",
-                "name": "B1_old",
-                "type": 2,
-                "checked": true
             },
             {
                 "address": "0x20000332",
@@ -3871,237 +3900,237 @@
                 "type": 5
             },
             {
-                "address": "0x200012ec",
+                "address": "0x200012e8",
                 "name": "hpcd_USB_FS.BESL",
                 "type": 5
             },
             {
-                "address": "0x200012b4",
+                "address": "0x200012b0",
                 "name": "hpcd_USB_FS.ErrorCode",
                 "type": 5
             },
             {
-                "address": "0x20001034",
+                "address": "0x20001030",
                 "name": "hpcd_USB_FS.IN_ep[0].data_pid_start",
                 "type": 1
             },
             {
-                "address": "0x2000103c",
+                "address": "0x20001038",
                 "name": "hpcd_USB_FS.IN_ep[0].doublebuffer",
                 "type": 1
             },
             {
-                "address": "0x20001031",
+                "address": "0x2000102d",
                 "name": "hpcd_USB_FS.IN_ep[0].is_in",
                 "type": 1
             },
             {
-                "address": "0x20001032",
+                "address": "0x2000102e",
                 "name": "hpcd_USB_FS.IN_ep[0].is_stall",
                 "type": 1
             },
             {
-                "address": "0x20001040",
+                "address": "0x2000103c",
                 "name": "hpcd_USB_FS.IN_ep[0].maxpacket",
                 "type": 5
             },
             {
-                "address": "0x20001030",
+                "address": "0x2000102c",
                 "name": "hpcd_USB_FS.IN_ep[0].num",
                 "type": 1
             },
             {
-                "address": "0x20001038",
+                "address": "0x20001034",
                 "name": "hpcd_USB_FS.IN_ep[0].pmaaddr0",
                 "type": 3
             },
             {
-                "address": "0x2000103a",
+                "address": "0x20001036",
                 "name": "hpcd_USB_FS.IN_ep[0].pmaaddr1",
                 "type": 3
             },
             {
-                "address": "0x20001036",
+                "address": "0x20001032",
                 "name": "hpcd_USB_FS.IN_ep[0].pmaadress",
                 "type": 3
             },
             {
-                "address": "0x20001033",
+                "address": "0x2000102f",
                 "name": "hpcd_USB_FS.IN_ep[0].type",
                 "type": 1
             },
             {
-                "address": "0x20001044",
+                "address": "0x20001040",
                 "name": "hpcd_USB_FS.IN_ep[0].xfer_buff",
                 "type": 5
             },
             {
-                "address": "0x2000104c",
+                "address": "0x20001048",
                 "name": "hpcd_USB_FS.IN_ep[0].xfer_count",
                 "type": 5
             },
             {
-                "address": "0x20001054",
+                "address": "0x20001050",
                 "name": "hpcd_USB_FS.IN_ep[0].xfer_fill_db",
                 "type": 1
             },
             {
-                "address": "0x20001048",
+                "address": "0x20001044",
                 "name": "hpcd_USB_FS.IN_ep[0].xfer_len",
                 "type": 5
             },
             {
-                "address": "0x20001050",
+                "address": "0x2000104c",
                 "name": "hpcd_USB_FS.IN_ep[0].xfer_len_db",
                 "type": 5
             },
             {
-                "address": "0x20001028",
+                "address": "0x20001024",
                 "name": "hpcd_USB_FS.Init.battery_charging_enable",
                 "type": 5
             },
             {
-                "address": "0x2000100c",
+                "address": "0x20001008",
                 "name": "hpcd_USB_FS.Init.dev_endpoints",
                 "type": 5
             },
             {
-                "address": "0x20001014",
+                "address": "0x20001010",
                 "name": "hpcd_USB_FS.Init.ep0_mps",
                 "type": 5
             },
             {
-                "address": "0x20001020",
+                "address": "0x2000101c",
                 "name": "hpcd_USB_FS.Init.low_power_enable",
                 "type": 5
             },
             {
-                "address": "0x20001024",
+                "address": "0x20001020",
                 "name": "hpcd_USB_FS.Init.lpm_enable",
                 "type": 5
             },
             {
-                "address": "0x20001018",
+                "address": "0x20001014",
                 "name": "hpcd_USB_FS.Init.phy_itface",
                 "type": 5
             },
             {
-                "address": "0x2000101c",
+                "address": "0x20001018",
                 "name": "hpcd_USB_FS.Init.Sof_enable",
                 "type": 5
             },
             {
-                "address": "0x20001010",
+                "address": "0x2000100c",
                 "name": "hpcd_USB_FS.Init.speed",
                 "type": 5
             },
             {
-                "address": "0x20001008",
+                "address": "0x20001004",
                 "name": "hpcd_USB_FS.Instance",
                 "type": 5
             },
             {
-                "address": "0x200012b0",
+                "address": "0x200012ac",
                 "name": "hpcd_USB_FS.Lock",
                 "type": 2
             },
             {
-                "address": "0x200012e8",
+                "address": "0x200012e4",
                 "name": "hpcd_USB_FS.LPM_State",
                 "type": 2
             },
             {
-                "address": "0x20001174",
+                "address": "0x20001170",
                 "name": "hpcd_USB_FS.OUT_ep[0].data_pid_start",
                 "type": 1
             },
             {
-                "address": "0x2000117c",
+                "address": "0x20001178",
                 "name": "hpcd_USB_FS.OUT_ep[0].doublebuffer",
                 "type": 1
             },
             {
-                "address": "0x20001171",
+                "address": "0x2000116d",
                 "name": "hpcd_USB_FS.OUT_ep[0].is_in",
                 "type": 1
             },
             {
-                "address": "0x20001172",
+                "address": "0x2000116e",
                 "name": "hpcd_USB_FS.OUT_ep[0].is_stall",
                 "type": 1
             },
             {
-                "address": "0x20001180",
+                "address": "0x2000117c",
                 "name": "hpcd_USB_FS.OUT_ep[0].maxpacket",
                 "type": 5
             },
             {
-                "address": "0x20001170",
+                "address": "0x2000116c",
                 "name": "hpcd_USB_FS.OUT_ep[0].num",
                 "type": 1
             },
             {
-                "address": "0x20001178",
+                "address": "0x20001174",
                 "name": "hpcd_USB_FS.OUT_ep[0].pmaaddr0",
                 "type": 3
             },
             {
-                "address": "0x2000117a",
+                "address": "0x20001176",
                 "name": "hpcd_USB_FS.OUT_ep[0].pmaaddr1",
                 "type": 3
             },
             {
-                "address": "0x20001176",
+                "address": "0x20001172",
                 "name": "hpcd_USB_FS.OUT_ep[0].pmaadress",
                 "type": 3
             },
             {
-                "address": "0x20001173",
+                "address": "0x2000116f",
                 "name": "hpcd_USB_FS.OUT_ep[0].type",
                 "type": 1
             },
             {
-                "address": "0x20001184",
+                "address": "0x20001180",
                 "name": "hpcd_USB_FS.OUT_ep[0].xfer_buff",
                 "type": 5
             },
             {
-                "address": "0x2000118c",
+                "address": "0x20001188",
                 "name": "hpcd_USB_FS.OUT_ep[0].xfer_count",
                 "type": 5
             },
             {
-                "address": "0x20001194",
+                "address": "0x20001190",
                 "name": "hpcd_USB_FS.OUT_ep[0].xfer_fill_db",
                 "type": 1
             },
             {
-                "address": "0x20001188",
+                "address": "0x20001184",
                 "name": "hpcd_USB_FS.OUT_ep[0].xfer_len",
                 "type": 5
             },
             {
-                "address": "0x20001190",
+                "address": "0x2000118c",
                 "name": "hpcd_USB_FS.OUT_ep[0].xfer_len_db",
                 "type": 5
             },
             {
-                "address": "0x200012f0",
+                "address": "0x200012ec",
                 "name": "hpcd_USB_FS.pData",
                 "type": 5
             },
             {
-                "address": "0x200012b8",
+                "address": "0x200012b4",
                 "name": "hpcd_USB_FS.Setup[0]",
                 "type": 5
             },
             {
-                "address": "0x200012b1",
+                "address": "0x200012ad",
                 "name": "hpcd_USB_FS.State",
                 "type": 2
             },
             {
-                "address": "0x2000102c",
+                "address": "0x20001028",
                 "name": "hpcd_USB_FS.USB_Address",
                 "type": 1
             },
@@ -4316,167 +4345,167 @@
                 "type": 2
             },
             {
-                "address": "0x200005e2",
+                "address": "0x200005de",
                 "name": "hUsbDeviceFS.dev_address",
                 "type": 1
             },
             {
-                "address": "0x20000348",
+                "address": "0x20000344",
                 "name": "hUsbDeviceFS.dev_config",
                 "type": 5
             },
             {
-                "address": "0x20000350",
+                "address": "0x2000034c",
                 "name": "hUsbDeviceFS.dev_config_status",
                 "type": 5
             },
             {
-                "address": "0x200005e3",
+                "address": "0x200005df",
                 "name": "hUsbDeviceFS.dev_connection_status",
                 "type": 1
             },
             {
-                "address": "0x2000034c",
+                "address": "0x20000348",
                 "name": "hUsbDeviceFS.dev_default_config",
                 "type": 5
             },
             {
-                "address": "0x200005e1",
+                "address": "0x200005dd",
                 "name": "hUsbDeviceFS.dev_old_state",
                 "type": 1
             },
             {
-                "address": "0x200005e8",
+                "address": "0x200005e4",
                 "name": "hUsbDeviceFS.dev_remote_wakeup",
                 "type": 5
             },
             {
-                "address": "0x20000354",
+                "address": "0x20000350",
                 "name": "hUsbDeviceFS.dev_speed",
                 "type": 2
             },
             {
-                "address": "0x200005e0",
+                "address": "0x200005dc",
                 "name": "hUsbDeviceFS.dev_state",
                 "type": 1
             },
             {
-                "address": "0x200005e4",
+                "address": "0x200005e0",
                 "name": "hUsbDeviceFS.dev_test_mode",
                 "type": 1
             },
             {
-                "address": "0x200005dc",
+                "address": "0x200005d8",
                 "name": "hUsbDeviceFS.ep0_data_len",
                 "type": 5
             },
             {
-                "address": "0x200005d8",
+                "address": "0x200005d4",
                 "name": "hUsbDeviceFS.ep0_state",
                 "type": 5
             },
             {
-                "address": "0x2000035c",
+                "address": "0x20000358",
                 "name": "hUsbDeviceFS.ep_in[0].is_used",
                 "type": 5
             },
             {
-                "address": "0x20000368",
+                "address": "0x20000364",
                 "name": "hUsbDeviceFS.ep_in[0].maxpacket",
                 "type": 5
             },
             {
-                "address": "0x20000364",
+                "address": "0x20000360",
                 "name": "hUsbDeviceFS.ep_in[0].rem_length",
                 "type": 5
             },
             {
-                "address": "0x20000358",
+                "address": "0x20000354",
                 "name": "hUsbDeviceFS.ep_in[0].status",
                 "type": 5
             },
             {
-                "address": "0x20000360",
+                "address": "0x2000035c",
                 "name": "hUsbDeviceFS.ep_in[0].total_length",
                 "type": 5
             },
             {
-                "address": "0x2000049c",
+                "address": "0x20000498",
                 "name": "hUsbDeviceFS.ep_out[0].is_used",
                 "type": 5
             },
             {
-                "address": "0x200004a8",
+                "address": "0x200004a4",
                 "name": "hUsbDeviceFS.ep_out[0].maxpacket",
                 "type": 5
             },
             {
-                "address": "0x200004a4",
+                "address": "0x200004a0",
                 "name": "hUsbDeviceFS.ep_out[0].rem_length",
                 "type": 5
             },
             {
-                "address": "0x20000498",
+                "address": "0x20000494",
                 "name": "hUsbDeviceFS.ep_out[0].status",
                 "type": 5
             },
             {
-                "address": "0x200004a0",
+                "address": "0x2000049c",
                 "name": "hUsbDeviceFS.ep_out[0].total_length",
                 "type": 5
             },
             {
-                "address": "0x20000344",
+                "address": "0x20000340",
                 "name": "hUsbDeviceFS.id",
                 "type": 1
             },
             {
-                "address": "0x200005f8",
+                "address": "0x200005f4",
                 "name": "hUsbDeviceFS.pClass",
                 "type": 5
             },
             {
-                "address": "0x200005fc",
+                "address": "0x200005f8",
                 "name": "hUsbDeviceFS.pClassData",
                 "type": 5
             },
             {
-                "address": "0x20000604",
+                "address": "0x20000600",
                 "name": "hUsbDeviceFS.pData",
                 "type": 5
             },
             {
-                "address": "0x200005f4",
+                "address": "0x200005f0",
                 "name": "hUsbDeviceFS.pDesc",
                 "type": 5
             },
             {
-                "address": "0x20000600",
+                "address": "0x200005fc",
                 "name": "hUsbDeviceFS.pUserData",
                 "type": 5
             },
             {
-                "address": "0x200005ec",
+                "address": "0x200005e8",
                 "name": "hUsbDeviceFS.request.bmRequest",
                 "type": 1
             },
             {
-                "address": "0x200005ed",
+                "address": "0x200005e9",
                 "name": "hUsbDeviceFS.request.bRequest",
                 "type": 1
             },
             {
-                "address": "0x200005f0",
+                "address": "0x200005ec",
                 "name": "hUsbDeviceFS.request.wIndex",
                 "type": 3
             },
             {
-                "address": "0x200005f2",
+                "address": "0x200005ee",
                 "name": "hUsbDeviceFS.request.wLength",
                 "type": 3
             },
             {
-                "address": "0x200005ee",
+                "address": "0x200005ea",
                 "name": "hUsbDeviceFS.request.wValue",
                 "type": 3
             },
@@ -4637,7 +4666,7 @@
                 "type": 1
             },
             {
-                "address": "0x20000e08",
+                "address": "0x20000e04",
                 "name": "USBD_StrDesc[0]",
                 "type": 1
             },
@@ -4647,17 +4676,17 @@
                 "type": 1
             },
             {
-                "address": "0x20000608",
+                "address": "0x20000604",
                 "name": "UserRxBufferFS[0]",
                 "type": 1
             },
             {
-                "address": "0x20000a08",
+                "address": "0x20000a04",
                 "name": "UserTxBufferFS[0]",
                 "type": 1
             },
             {
-                "address": "0x2000033c",
+                "address": "0x20000338",
                 "name": "uwTick",
                 "type": 5
             },
@@ -4674,7 +4703,7 @@
         ],
         "expand": false,
         "filename": "VMS semestralka.elf",
-        "exeModifiedTime": 1698586303328,
-        "configLastUpdate": 1698587989105
+        "exeModifiedTime": 1699973399693,
+        "configLastUpdate": 1699973475580
     }
 ]

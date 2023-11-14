@@ -1,0 +1,1347 @@
+[
+    {
+        "id": "d59587ff.cd1748",
+        "type": "variables",
+        "z": "7b9ed63e.2138f8",
+        "groupname": "TIM",
+        "accesspoint": 0,
+        "execonfig": "be2ea073ff51204a",
+        "variablelist": [],
+        "triggerstartmode": "manual",
+        "triggername": "tim17",
+        "triggerthreshold": "30000",
+        "frequency": "",
+        "frequencyType": "0",
+        "snapshotheader": "",
+        "mode": "direct",
+        "lastImportedTime": 1699970672460,
+        "openStatus": true,
+        "x": 310,
+        "y": 120,
+        "wires": [
+            [
+                "819fb76c405bf92d"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "be2ea073ff51204a",
+        "type": "exe-config",
+        "name": "tim16_17",
+        "exefile": "C:\\Users\\marti\\Desktop\\VMS semestralka\\VMS semestralka\\Debug\\VMS semestralka.elf",
+        "exefolder": "C:\\Users\\marti\\Desktop\\VMS semestralka\\VMS semestralka\\Debug",
+        "exevariablelist": [
+            {
+                "address": "0x20000334",
+                "name": "adc_comp",
+                "type": 1
+            },
+            {
+                "address": "0x2000033c",
+                "name": "adc_hod",
+                "type": 1
+            },
+            {
+                "address": "0x0800bfdc",
+                "name": "AHBPrescTable[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x0800bfec",
+                "name": "aPLLMULFactorTable[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x0800bffc",
+                "name": "aPredivFactorTable[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x2000033e",
+                "name": "duty",
+                "type": 3
+            },
+            {
+                "address": "0x20000144",
+                "name": "FS_Desc.GetConfigurationStrDescriptor",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000130",
+                "name": "FS_Desc.GetDeviceDescriptor",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000148",
+                "name": "FS_Desc.GetInterfaceStrDescriptor",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000134",
+                "name": "FS_Desc.GetLangIDStrDescriptor",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000138",
+                "name": "FS_Desc.GetManufacturerStrDescriptor",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000013c",
+                "name": "FS_Desc.GetProductStrDescriptor",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000140",
+                "name": "FS_Desc.GetSerialStrDescriptor",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001d4",
+                "name": "hadc1.DMA_Handle",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001e0",
+                "name": "hadc1.ErrorCode",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001a0",
+                "name": "hadc1.Init.ClockPrescaler",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001b5",
+                "name": "hadc1.Init.ContinuousConvMode",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200001a8",
+                "name": "hadc1.Init.DataAlign",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001bc",
+                "name": "hadc1.Init.DiscontinuousConvMode",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200001cc",
+                "name": "hadc1.Init.DMAContinuousRequests",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200001b0",
+                "name": "hadc1.Init.EOCSelection",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001c4",
+                "name": "hadc1.Init.ExternalTrigConv",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001c8",
+                "name": "hadc1.Init.ExternalTrigConvEdge",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001b4",
+                "name": "hadc1.Init.LowPowerAutoWait",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200001b8",
+                "name": "hadc1.Init.NbrOfConversion",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001c0",
+                "name": "hadc1.Init.NbrOfDiscConversion",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001d0",
+                "name": "hadc1.Init.Overrun",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001a4",
+                "name": "hadc1.Init.Resolution",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001ac",
+                "name": "hadc1.Init.ScanConvMode",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001e8",
+                "name": "hadc1.InjectionConfig.ChannelCount",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001e4",
+                "name": "hadc1.InjectionConfig.ContextQueue",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000019c",
+                "name": "hadc1.Instance",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001d8",
+                "name": "hadc1.Lock",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200001dc",
+                "name": "hadc1.State",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000224",
+                "name": "hadc3.DMA_Handle",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000230",
+                "name": "hadc3.ErrorCode",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001f0",
+                "name": "hadc3.Init.ClockPrescaler",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000205",
+                "name": "hadc3.Init.ContinuousConvMode",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200001f8",
+                "name": "hadc3.Init.DataAlign",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000020c",
+                "name": "hadc3.Init.DiscontinuousConvMode",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x2000021c",
+                "name": "hadc3.Init.DMAContinuousRequests",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x20000200",
+                "name": "hadc3.Init.EOCSelection",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000214",
+                "name": "hadc3.Init.ExternalTrigConv",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000218",
+                "name": "hadc3.Init.ExternalTrigConvEdge",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000204",
+                "name": "hadc3.Init.LowPowerAutoWait",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x20000208",
+                "name": "hadc3.Init.NbrOfConversion",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000210",
+                "name": "hadc3.Init.NbrOfDiscConversion",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000220",
+                "name": "hadc3.Init.Overrun",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001f4",
+                "name": "hadc3.Init.Resolution",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001fc",
+                "name": "hadc3.Init.ScanConvMode",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000238",
+                "name": "hadc3.InjectionConfig.ChannelCount",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000234",
+                "name": "hadc3.InjectionConfig.ContextQueue",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200001ec",
+                "name": "hadc3.Instance",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000228",
+                "name": "hadc3.Lock",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x2000022c",
+                "name": "hadc3.State",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200012f4",
+                "name": "hpcd_USB_FS.BESL",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200012bc",
+                "name": "hpcd_USB_FS.ErrorCode",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000103c",
+                "name": "hpcd_USB_FS.IN_ep[0].data_pid_start",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20001044",
+                "name": "hpcd_USB_FS.IN_ep[0].doublebuffer",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20001039",
+                "name": "hpcd_USB_FS.IN_ep[0].is_in",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x2000103a",
+                "name": "hpcd_USB_FS.IN_ep[0].is_stall",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20001048",
+                "name": "hpcd_USB_FS.IN_ep[0].maxpacket",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20001038",
+                "name": "hpcd_USB_FS.IN_ep[0].num",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20001040",
+                "name": "hpcd_USB_FS.IN_ep[0].pmaaddr0",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x20001042",
+                "name": "hpcd_USB_FS.IN_ep[0].pmaaddr1",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2000103e",
+                "name": "hpcd_USB_FS.IN_ep[0].pmaadress",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2000103b",
+                "name": "hpcd_USB_FS.IN_ep[0].type",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x2000104c",
+                "name": "hpcd_USB_FS.IN_ep[0].xfer_buff",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20001054",
+                "name": "hpcd_USB_FS.IN_ep[0].xfer_count",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000105c",
+                "name": "hpcd_USB_FS.IN_ep[0].xfer_fill_db",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20001050",
+                "name": "hpcd_USB_FS.IN_ep[0].xfer_len",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20001058",
+                "name": "hpcd_USB_FS.IN_ep[0].xfer_len_db",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20001030",
+                "name": "hpcd_USB_FS.Init.battery_charging_enable",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20001014",
+                "name": "hpcd_USB_FS.Init.dev_endpoints",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000101c",
+                "name": "hpcd_USB_FS.Init.ep0_mps",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20001028",
+                "name": "hpcd_USB_FS.Init.low_power_enable",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000102c",
+                "name": "hpcd_USB_FS.Init.lpm_enable",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20001020",
+                "name": "hpcd_USB_FS.Init.phy_itface",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20001024",
+                "name": "hpcd_USB_FS.Init.Sof_enable",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20001018",
+                "name": "hpcd_USB_FS.Init.speed",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20001010",
+                "name": "hpcd_USB_FS.Instance",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200012b8",
+                "name": "hpcd_USB_FS.Lock",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200012f0",
+                "name": "hpcd_USB_FS.LPM_State",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x2000117c",
+                "name": "hpcd_USB_FS.OUT_ep[0].data_pid_start",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20001184",
+                "name": "hpcd_USB_FS.OUT_ep[0].doublebuffer",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20001179",
+                "name": "hpcd_USB_FS.OUT_ep[0].is_in",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x2000117a",
+                "name": "hpcd_USB_FS.OUT_ep[0].is_stall",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20001188",
+                "name": "hpcd_USB_FS.OUT_ep[0].maxpacket",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20001178",
+                "name": "hpcd_USB_FS.OUT_ep[0].num",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20001180",
+                "name": "hpcd_USB_FS.OUT_ep[0].pmaaddr0",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x20001182",
+                "name": "hpcd_USB_FS.OUT_ep[0].pmaaddr1",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2000117e",
+                "name": "hpcd_USB_FS.OUT_ep[0].pmaadress",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x2000117b",
+                "name": "hpcd_USB_FS.OUT_ep[0].type",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x2000118c",
+                "name": "hpcd_USB_FS.OUT_ep[0].xfer_buff",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20001194",
+                "name": "hpcd_USB_FS.OUT_ep[0].xfer_count",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000119c",
+                "name": "hpcd_USB_FS.OUT_ep[0].xfer_fill_db",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20001190",
+                "name": "hpcd_USB_FS.OUT_ep[0].xfer_len",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20001198",
+                "name": "hpcd_USB_FS.OUT_ep[0].xfer_len_db",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200012f8",
+                "name": "hpcd_USB_FS.pData",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200012c0",
+                "name": "hpcd_USB_FS.Setup[0]",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200012b9",
+                "name": "hpcd_USB_FS.State",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x20001034",
+                "name": "hpcd_USB_FS.USB_Address",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x200002a4",
+                "name": "htim16.Channel",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200002cc",
+                "name": "htim16.ChannelNState[0]",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200002c6",
+                "name": "htim16.ChannelState[0]",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200002d0",
+                "name": "htim16.DMABurstState",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200002a8",
+                "name": "htim16.hdma[0]",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200002a0",
+                "name": "htim16.Init.AutoReloadPreload",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000298",
+                "name": "htim16.Init.ClockDivision",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000290",
+                "name": "htim16.Init.CounterMode",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000294",
+                "name": "htim16.Init.Period",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000028c",
+                "name": "htim16.Init.Prescaler",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000029c",
+                "name": "htim16.Init.RepetitionCounter",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000288",
+                "name": "htim16.Instance",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200002c4",
+                "name": "htim16.Lock",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200002c5",
+                "name": "htim16.State",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200002f0",
+                "name": "htim17.Channel",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x20000318",
+                "name": "htim17.ChannelNState[0]",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x20000312",
+                "name": "htim17.ChannelState[0]",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x2000031c",
+                "name": "htim17.DMABurstState",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200002f4",
+                "name": "htim17.hdma[0]",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200002ec",
+                "name": "htim17.Init.AutoReloadPreload",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200002e4",
+                "name": "htim17.Init.ClockDivision",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200002dc",
+                "name": "htim17.Init.CounterMode",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200002e0",
+                "name": "htim17.Init.Period",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200002d8",
+                "name": "htim17.Init.Prescaler",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200002e8",
+                "name": "htim17.Init.RepetitionCounter",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200002d4",
+                "name": "htim17.Instance",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000310",
+                "name": "htim17.Lock",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x20000311",
+                "name": "htim17.State",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x20000258",
+                "name": "htim2.Channel",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x20000280",
+                "name": "htim2.ChannelNState[0]",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x2000027a",
+                "name": "htim2.ChannelState[0]",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x20000284",
+                "name": "htim2.DMABurstState",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x2000025c",
+                "name": "htim2.hdma[0]",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000254",
+                "name": "htim2.Init.AutoReloadPreload",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000024c",
+                "name": "htim2.Init.ClockDivision",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000244",
+                "name": "htim2.Init.CounterMode",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000248",
+                "name": "htim2.Init.Period",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000240",
+                "name": "htim2.Init.Prescaler",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000250",
+                "name": "htim2.Init.RepetitionCounter",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000023c",
+                "name": "htim2.Instance",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000278",
+                "name": "htim2.Lock",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x20000279",
+                "name": "htim2.State",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200005ea",
+                "name": "hUsbDeviceFS.dev_address",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20000350",
+                "name": "hUsbDeviceFS.dev_config",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000358",
+                "name": "hUsbDeviceFS.dev_config_status",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200005eb",
+                "name": "hUsbDeviceFS.dev_connection_status",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20000354",
+                "name": "hUsbDeviceFS.dev_default_config",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200005e9",
+                "name": "hUsbDeviceFS.dev_old_state",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x200005f0",
+                "name": "hUsbDeviceFS.dev_remote_wakeup",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000035c",
+                "name": "hUsbDeviceFS.dev_speed",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x200005e8",
+                "name": "hUsbDeviceFS.dev_state",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x200005ec",
+                "name": "hUsbDeviceFS.dev_test_mode",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x200005e4",
+                "name": "hUsbDeviceFS.ep0_data_len",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200005e0",
+                "name": "hUsbDeviceFS.ep0_state",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000364",
+                "name": "hUsbDeviceFS.ep_in[0].is_used",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000370",
+                "name": "hUsbDeviceFS.ep_in[0].maxpacket",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000036c",
+                "name": "hUsbDeviceFS.ep_in[0].rem_length",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000360",
+                "name": "hUsbDeviceFS.ep_in[0].status",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000368",
+                "name": "hUsbDeviceFS.ep_in[0].total_length",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200004a4",
+                "name": "hUsbDeviceFS.ep_out[0].is_used",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200004b0",
+                "name": "hUsbDeviceFS.ep_out[0].maxpacket",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200004ac",
+                "name": "hUsbDeviceFS.ep_out[0].rem_length",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200004a0",
+                "name": "hUsbDeviceFS.ep_out[0].status",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200004a8",
+                "name": "hUsbDeviceFS.ep_out[0].total_length",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000034c",
+                "name": "hUsbDeviceFS.id",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20000600",
+                "name": "hUsbDeviceFS.pClass",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000604",
+                "name": "hUsbDeviceFS.pClassData",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000060c",
+                "name": "hUsbDeviceFS.pData",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200005fc",
+                "name": "hUsbDeviceFS.pDesc",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000608",
+                "name": "hUsbDeviceFS.pUserData",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x200005f4",
+                "name": "hUsbDeviceFS.request.bmRequest",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x200005f5",
+                "name": "hUsbDeviceFS.request.bRequest",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x200005f8",
+                "name": "hUsbDeviceFS.request.wIndex",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x200005fa",
+                "name": "hUsbDeviceFS.request.wLength",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x200005f6",
+                "name": "hUsbDeviceFS.request.wValue",
+                "type": 3,
+                "checked": false
+            },
+            {
+                "address": "0x20000340",
+                "name": "p",
+                "type": 9
+            },
+            {
+                "address": "0x20000336",
+                "name": "puls_old",
+                "type": 3
+            },
+            {
+                "address": "0x20000338",
+                "name": "pulsu",
+                "type": 3
+            },
+            {
+                "address": "0x2000033a",
+                "name": "RPM",
+                "type": 3
+            },
+            {
+                "address": "0x20000000",
+                "name": "smer_otaceni",
+                "type": 2
+            },
+            {
+                "address": "0x20000004",
+                "name": "SystemCoreClock",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000320",
+                "name": "tim16",
+                "type": 6,
+                "checked": true
+            },
+            {
+                "address": "0x20000324",
+                "name": "tim17",
+                "type": 6,
+                "checked": true
+            },
+            {
+                "address": "0x20000328",
+                "name": "tim2",
+                "type": 6,
+                "checked": true
+            },
+            {
+                "address": "0x2000032c",
+                "name": "tim2_ch2",
+                "type": 6,
+                "checked": true
+            },
+            {
+                "address": "0x20000330",
+                "name": "tim2_ch4",
+                "type": 6,
+                "checked": true
+            },
+            {
+                "address": "0x20000030",
+                "name": "USBD_CDC.DataIn",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000034",
+                "name": "USBD_CDC.DataOut",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000020",
+                "name": "USBD_CDC.DeInit",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000002c",
+                "name": "USBD_CDC.EP0_RxReady",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000028",
+                "name": "USBD_CDC.EP0_TxSent",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000050",
+                "name": "USBD_CDC.GetDeviceQualifierDescriptor",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000048",
+                "name": "USBD_CDC.GetFSConfigDescriptor",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000044",
+                "name": "USBD_CDC.GetHSConfigDescriptor",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000004c",
+                "name": "USBD_CDC.GetOtherSpeedConfigDescriptor",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000001c",
+                "name": "USBD_CDC.Init",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000003c",
+                "name": "USBD_CDC.IsoINIncomplete",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000040",
+                "name": "USBD_CDC.IsoOUTIncomplete",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000024",
+                "name": "USBD_CDC.Setup",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000038",
+                "name": "USBD_CDC.SOF",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000098",
+                "name": "USBD_CDC_CfgFSDesc[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20000054",
+                "name": "USBD_CDC_CfgHSDesc[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20000010",
+                "name": "USBD_CDC_DeviceQualifierDesc[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x200000dc",
+                "name": "USBD_CDC_OtherSpeedCfgDesc[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x2000014c",
+                "name": "USBD_FS_DeviceDesc[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20000128",
+                "name": "USBD_Interface_fops_FS.Control",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000124",
+                "name": "USBD_Interface_fops_FS.DeInit",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000120",
+                "name": "USBD_Interface_fops_FS.Init",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000012c",
+                "name": "USBD_Interface_fops_FS.Receive",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x20000160",
+                "name": "USBD_LangIDDesc[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20000e10",
+                "name": "USBD_StrDesc[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20000164",
+                "name": "USBD_StringSerial[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20000610",
+                "name": "UserRxBufferFS[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20000a10",
+                "name": "UserTxBufferFS[0]",
+                "type": 1,
+                "checked": false
+            },
+            {
+                "address": "0x20000344",
+                "name": "uwTick",
+                "type": 5,
+                "checked": false
+            },
+            {
+                "address": "0x2000000c",
+                "name": "uwTickFreq",
+                "type": 2,
+                "checked": false
+            },
+            {
+                "address": "0x20000008",
+                "name": "uwTickPrio",
+                "type": 5,
+                "checked": false
+            }
+        ],
+        "expand": false,
+        "filename": "VMS semestralka.elf",
+        "exeModifiedTime": 1699970523182,
+        "configLastUpdate": 1699970672135
+    }
+]

@@ -74,6 +74,11 @@ int tim2 = 0;
 int tim2_ch2 = 0;
 int tim2_ch4 = 0;
 
+uint8_t adc_comp=0;
+uint16_t puls_old=0;
+uint16_t pulsu=0;
+uint16_t RPM=0;
+
 uint8_t adc_hod = 0; //ADC1 raw hodnota
 uint16_t duty = 0;
 float p = 0; //procenta (pro monitor)
@@ -93,6 +98,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim == &htim16)
 	{
 		HAL_GPIO_TogglePin(LD9_GPIO_Port, LD9_Pin);
+		tim16 = HAL_GPIO_ReadPin(LD10_GPIO_Port, LD10_Pin);
+		//tim16*=2000;
+		RPM=pulsu;
+		pulsu=0;
 	}
 	if (htim == &htim2)
 	{
@@ -191,6 +200,30 @@ void dec_ascii(uint16_t dec, char ret[],uint8_t len)
 		rad/=10;
 	}
 }
+
+void zpracuj_ADC3(uint16_t val)
+{
+	HAL_GPIO_TogglePin(LD5_GPIO_Port, LD5_Pin);
+	adc_comp = HAL_GPIO_ReadPin(LD5_GPIO_Port, LD5_Pin)+12;
+
+	uint16_t puls_new=HAL_ADC_GetValue(&hadc3);
+	puls_old=puls_new;
+
+	pulsu++;
+}
+
+uint16_t cti_ADC(ADC_HandleTypeDef* hadc)
+{
+	uint16_t ret=0;
+	HAL_ADC_Start(hadc);
+	if (HAL_ADC_PollForConversion(hadc, 10) == HAL_OK)
+	{
+		ret = HAL_ADC_GetValue(hadc);
+	}
+	HAL_ADC_Stop(hadc);
+
+	return ret;
+}
 /* USER CODE END 0 */
 
 /**
@@ -241,14 +274,18 @@ int main(void)
 	//HAL_StatusTypeDef s=HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 	while (1)
 	{
-		HAL_ADC_Start(&hadc1);
+		/*HAL_ADC_Start(&hadc1);
 		if (HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK)
 		{
 			adc_hod = HAL_ADC_GetValue(&hadc1);
 		}
-		HAL_ADC_Stop(&hadc1);
+		HAL_ADC_Stop(&hadc1);*/
+		adc_hod=cti_ADC(&hadc1);
 		duty = dutyCycle(adc_hod, 1000);
 		updateDuty(duty);
+
+		uint16_t adc3_hod=cti_ADC(&hadc3);
+		zpracuj_ADC3(adc3_hod);
 
 		char bufferADC[4]={1,1,1,1};
 		dec_ascii(adc_hod, bufferADC,4);

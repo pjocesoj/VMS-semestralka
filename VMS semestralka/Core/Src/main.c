@@ -104,7 +104,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		tim16 = HAL_GPIO_ReadPin(LD10_GPIO_Port, LD10_Pin);
 		//tim16*=2000;
 		RPM=pulsu;
-		//pulsu=0;
+		pulsu=0;
 	}
 	if (htim == &htim2)
 	{
@@ -235,6 +235,15 @@ uint16_t cti_ADC(ADC_HandleTypeDef* hadc)
 
 	return ret;
 }
+void spocitejPerioduTIM(TIM_HandleTypeDef* htim)
+{
+	uint32_t APB2=HAL_RCC_GetPCLK2Freq();
+	//uint32_t tim16_psc=&htim16.Instance->PSC; //z nejakeho duvodu vrací jinou hodnotu než debug
+	uint32_t psc=48000;
+	uint32_t arr=__HAL_TIM_GET_AUTORELOAD(htim);
+
+	uint32_t speed=APB2/(psc*arr);//Hz
+}
 /* USER CODE END 0 */
 
 /**
@@ -283,6 +292,8 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	//HAL_StatusTypeDef s=HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
+
+	spocitejPerioduTIM(&htim16);
 	while (1)
 	{
 		/*HAL_ADC_Start(&hadc1);
@@ -573,7 +584,7 @@ static void MX_TIM16_Init(void)
   htim16.Instance = TIM16;
   htim16.Init.Prescaler = 48000;
   htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim16.Init.Period = 1000;
+  htim16.Init.Period = 500;
   htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim16.Init.RepetitionCounter = 0;
   htim16.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;

@@ -74,7 +74,8 @@ int tim2 = 0;
 int tim2_ch2 = 0;
 int tim2_ch4 = 0;
 
-uint16_t adc3_hod = 0; //ADC3 raw hodnota
+uint16_t adc3_new = 0; //ADC3 raw hodnota
+uint16_t adc3_old = 0; //ADC3 v t-1
 uint8_t adc_comp=0;
 uint16_t puls_old=0;
 uint16_t puls_new=0;
@@ -219,6 +220,7 @@ void zpracuj_ADC3(uint16_t val)
 	}
 
 	puls_old=puls_new;
+	adc3_old=val;
 }
 
 uint16_t cti_ADC(ADC_HandleTypeDef* hadc)
@@ -293,8 +295,8 @@ int main(void)
 		duty = dutyCycle(adc_hod, 1000);
 		updateDuty(duty);
 
-		adc3_hod=cti_ADC(&hadc3);
-		zpracuj_ADC3(adc3_hod);
+		adc3_new=cti_ADC(&hadc3);
+		zpracuj_ADC3(adc3_new);
 
 		char bufferADC[4]={1,1,1,1};
 		dec_ascii(adc_hod, bufferADC,4);

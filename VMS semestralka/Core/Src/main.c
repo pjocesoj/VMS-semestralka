@@ -74,8 +74,10 @@ int tim2 = 0;
 int tim2_ch2 = 0;
 int tim2_ch4 = 0;
 
+uint16_t adc3_hod = 0; //ADC3 raw hodnota
 uint8_t adc_comp=0;
 uint16_t puls_old=0;
+uint16_t puls_new=0;
 uint16_t pulsu=0;
 uint16_t RPM=0;
 
@@ -101,7 +103,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		tim16 = HAL_GPIO_ReadPin(LD10_GPIO_Port, LD10_Pin);
 		//tim16*=2000;
 		RPM=pulsu;
-		pulsu=0;
+		//pulsu=0;
 	}
 	if (htim == &htim2)
 	{
@@ -206,10 +208,17 @@ void zpracuj_ADC3(uint16_t val)
 	HAL_GPIO_TogglePin(LD5_GPIO_Port, LD5_Pin);
 	adc_comp = HAL_GPIO_ReadPin(LD5_GPIO_Port, LD5_Pin)+12;
 
-	uint16_t puls_new=HAL_ADC_GetValue(&hadc3);
-	puls_old=puls_new;
+	//uint16_t puls_new=HAL_ADC_GetValue(&hadc3);
 
-	pulsu++;
+	if(val<800){puls_new=1;}
+	else {puls_new=0;}
+
+	if(puls_old!=puls_new)
+	{
+		pulsu++;
+	}
+
+	puls_old=puls_new;
 }
 
 uint16_t cti_ADC(ADC_HandleTypeDef* hadc)
@@ -284,7 +293,7 @@ int main(void)
 		duty = dutyCycle(adc_hod, 1000);
 		updateDuty(duty);
 
-		uint16_t adc3_hod=cti_ADC(&hadc3);
+		adc3_hod=cti_ADC(&hadc3);
 		zpracuj_ADC3(adc3_hod);
 
 		char bufferADC[4]={1,1,1,1};

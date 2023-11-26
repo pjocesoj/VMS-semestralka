@@ -214,6 +214,19 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 		pulsu++;
 	}
 }
+
+uint16_t cti_ADC(ADC_HandleTypeDef* hadc)
+{
+	uint16_t ret=0;
+	HAL_ADC_Start(hadc);
+	if (HAL_ADC_PollForConversion(hadc, 10) == HAL_OK)
+	{
+		ret = HAL_ADC_GetValue(hadc);
+	}
+	HAL_ADC_Stop(hadc);
+
+	return ret;
+}
 /* USER CODE END 0 */
 
 /**
@@ -258,7 +271,7 @@ int main(void)
 	HAL_TIM_Base_Start_IT(&htim17);
 	HAL_TIM_Base_Start_IT(&htim16);
 
-	HAL_ADC_Start_IT(&hadc3);
+	//HAL_ADC_Start_IT(&hadc3);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -266,14 +279,17 @@ int main(void)
 	//HAL_StatusTypeDef s=HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 	while (1)
 	{
-		HAL_ADC_Start(&hadc1);
+		/*HAL_ADC_Start(&hadc1);
 		if (HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK)
 		{
 			adc_hod = HAL_ADC_GetValue(&hadc1);
 		}
-		HAL_ADC_Stop(&hadc1);
+		HAL_ADC_Stop(&hadc1);*/
+		adc_hod=cti_ADC(&hadc1);
 		duty = dutyCycle(adc_hod, 1000);
 		updateDuty(duty);
+
+		uint16_t adc3_hod=cti_ADC(&hadc3);
 
 		char bufferADC[4]={1,1,1,1};
 		dec_ascii(adc_hod, bufferADC,4);

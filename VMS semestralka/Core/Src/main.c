@@ -239,7 +239,7 @@ void spocitejPerioduTIM(TIM_HandleTypeDef* htim)
 {
 	uint32_t APB2=HAL_RCC_GetPCLK2Freq();
 	//uint32_t tim16_psc=&htim16.Instance->PSC; //z nejakeho duvodu vrací jinou hodnotu než debug
-	uint32_t psc=48000;
+	uint32_t psc=htim->Instance->PSC; //musí být pointer jinak vrací adresy (nebo co to je)
 	uint32_t arr=__HAL_TIM_GET_AUTORELOAD(htim);
 
 	uint32_t speed=APB2/(psc*arr);//Hz

@@ -41,13 +41,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  18 .debug_macro  000210fc  00000000  00000000  0003b88e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line   00018c8f  00000000  00000000  0005c98a  2**0
+ 19 .debug_line   00018c92  00000000  00000000  0005c98a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_str    000bfa42  00000000  00000000  00075619  2**0
+ 20 .debug_str    000bfa42  00000000  00000000  0007561c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_frame  00004cfc  00000000  00000000  0013505c  2**2
+ 21 .debug_frame  00004cfc  00000000  00000000  00135060  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000065  00000000  00000000  00139d58  2**0
+ 22 .debug_line_str 00000065  00000000  00000000  00139d5c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -674,28 +674,29 @@ void spocitejPerioduTIM(TIM_HandleTypeDef* htim)
  80005c6:	f005 fc15 	bl	8005df4 <HAL_RCC_GetPCLK2Freq>
  80005ca:	6178      	str	r0, [r7, #20]
 	//uint32_t tim16_psc=&htim16.Instance->PSC; //z nejakeho duvodu vrací jinou hodnotu než debug
-	uint32_t psc=48000;
- 80005cc:	f64b 3380 	movw	r3, #48000	; 0xbb80
- 80005d0:	613b      	str	r3, [r7, #16]
+	uint32_t psc=htim->Instance->PSC; //musí být pointer jinak vrací adresy (nebo co to je)
+ 80005cc:	687b      	ldr	r3, [r7, #4]
+ 80005ce:	681b      	ldr	r3, [r3, #0]
+ 80005d0:	6a9b      	ldr	r3, [r3, #40]	; 0x28
+ 80005d2:	613b      	str	r3, [r7, #16]
 	uint32_t arr=__HAL_TIM_GET_AUTORELOAD(htim);
- 80005d2:	687b      	ldr	r3, [r7, #4]
- 80005d4:	681b      	ldr	r3, [r3, #0]
- 80005d6:	6adb      	ldr	r3, [r3, #44]	; 0x2c
- 80005d8:	60fb      	str	r3, [r7, #12]
+ 80005d4:	687b      	ldr	r3, [r7, #4]
+ 80005d6:	681b      	ldr	r3, [r3, #0]
+ 80005d8:	6adb      	ldr	r3, [r3, #44]	; 0x2c
+ 80005da:	60fb      	str	r3, [r7, #12]
 
 	uint32_t speed=APB2/(psc*arr);//Hz
- 80005da:	693b      	ldr	r3, [r7, #16]
- 80005dc:	68fa      	ldr	r2, [r7, #12]
- 80005de:	fb02 f303 	mul.w	r3, r2, r3
- 80005e2:	697a      	ldr	r2, [r7, #20]
- 80005e4:	fbb2 f3f3 	udiv	r3, r2, r3
- 80005e8:	60bb      	str	r3, [r7, #8]
+ 80005dc:	693b      	ldr	r3, [r7, #16]
+ 80005de:	68fa      	ldr	r2, [r7, #12]
+ 80005e0:	fb02 f303 	mul.w	r3, r2, r3
+ 80005e4:	697a      	ldr	r2, [r7, #20]
+ 80005e6:	fbb2 f3f3 	udiv	r3, r2, r3
+ 80005ea:	60bb      	str	r3, [r7, #8]
 }
- 80005ea:	bf00      	nop
- 80005ec:	3718      	adds	r7, #24
- 80005ee:	46bd      	mov	sp, r7
- 80005f0:	bd80      	pop	{r7, pc}
-	...
+ 80005ec:	bf00      	nop
+ 80005ee:	3718      	adds	r7, #24
+ 80005f0:	46bd      	mov	sp, r7
+ 80005f2:	bd80      	pop	{r7, pc}
 
 080005f4 <main>:
 /**

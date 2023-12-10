@@ -202,7 +202,7 @@ void spocitejPerioduTIM(TIM_HandleTypeDef* htim)
 	uint32_t psc=htim->Instance->PSC; //musí být pointer jinak vrací adresy (nebo co to je)
 	uint32_t arr=__HAL_TIM_GET_AUTORELOAD(htim);
 
-	uint32_t speed=APB2/(psc*arr);//Hz
+	uint32_t speed=APB2/((psc+1)*(arr+1));//Hz
 }
 /* USER CODE END 0 */
 
@@ -479,7 +479,7 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 48000;
+  htim2.Init.Prescaler = 48000-1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 1000;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -538,9 +538,9 @@ static void MX_TIM16_Init(void)
 
   /* USER CODE END TIM16_Init 1 */
   htim16.Instance = TIM16;
-  htim16.Init.Prescaler = 48000;
+  htim16.Init.Prescaler = 48000-1;
   htim16.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim16.Init.Period = 500;
+  htim16.Init.Period = 250-1;
   htim16.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim16.Init.RepetitionCounter = 0;
   htim16.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
@@ -570,7 +570,7 @@ static void MX_TIM17_Init(void)
 
   /* USER CODE END TIM17_Init 1 */
   htim17.Instance = TIM17;
-  htim17.Init.Prescaler = 48000;
+  htim17.Init.Prescaler = 48000-1;
   htim17.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim17.Init.Period = 1000;
   htim17.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;

@@ -20,6 +20,7 @@
 #include "main.h"
 #include "usb_device.h"
 
+#include "..\..\Helpers/monitor.h"
 #include "..\..\Helpers/GPIO_helper.h"
 #include "..\..\Helpers/USB_helper.h"
 /* Private includes ----------------------------------------------------------*/
@@ -70,14 +71,7 @@ typedef enum
 	DOPRAVA = 1,
 } SmerOtaceni;
 
-int tim16 = 0;
-int tim17 = 0;
-int tim2 = 0;
-int tim2_ch2 = 0;
-int tim2_ch4 = 0;
 
-uint16_t adc3_new = 0; //ADC3 raw hodnota
-uint16_t adc3_old = 0; //ADC3 v t-1
 uint8_t adc_comp=0;
 uint16_t puls_old=0;
 uint16_t puls_new=0;
@@ -97,45 +91,24 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim == &htim17)
 	{
-		HAL_GPIO_TogglePin(LD10_GPIO_Port, LD10_Pin);
-		tim17 = HAL_GPIO_ReadPin(LD10_GPIO_Port, LD10_Pin);
+		//TIM17_monitor();
+		otocKruhem(smer_otaceni);
 	}
 	if (htim == &htim16)
 	{
-		HAL_GPIO_TogglePin(LD9_GPIO_Port, LD9_Pin);
-		tim16 = HAL_GPIO_ReadPin(LD10_GPIO_Port, LD10_Pin);
-		//tim16*=2000;
+		//TIM16_monitor();
 		RPM=pulsu;
 		pulsu=0;
 	}
 	if (htim == &htim2)
 	{
-		HAL_GPIO_TogglePin(LD8_GPIO_Port, LD8_Pin);
-		tim2 = HAL_GPIO_ReadPin(LD8_GPIO_Port, LD8_Pin);
-		tim2 += 9;
-
-		HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
-		tim2_ch2 = 1 + 3;
-		HAL_GPIO_TogglePin(LD6_GPIO_Port, LD6_Pin);
-		tim2_ch4 = 1 + 6;
+		//TIM2_monitor();
 	}
 }
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 {
-	if (htim == &htim2)
-	{
-		if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
-		{
-			HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
-			tim2_ch2 = 3;
-		}
-		if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4)
-		{
-			HAL_GPIO_TogglePin(LD6_GPIO_Port, LD6_Pin);
-			tim2_ch4 = 6;
-		}
-	}
+	//PWM_monitor(htim);
 }
 
 uint16_t dutyCycle(uint8_t adc, uint16_t period)
@@ -181,9 +154,6 @@ void zmenSmer()
 
 void zpracuj_ADC3(uint16_t val)
 {
-	HAL_GPIO_TogglePin(LD5_GPIO_Port, LD5_Pin);
-	adc_comp = HAL_GPIO_ReadPin(LD5_GPIO_Port, LD5_Pin)+12;
-
 	//uint16_t puls_new=HAL_ADC_GetValue(&hadc3);
 
 	if(val>200){puls_new=1;}
@@ -257,26 +227,22 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
-	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_2);
-	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);
-	HAL_TIM_Base_Start_IT(&htim2); //pro kontrolu
-	HAL_TIM_Base_Start_IT(&htim17);
-	HAL_TIM_Base_Start_IT(&htim16);
+  defineKruh();
+  spocitejPerioduTIM(&htim16);
+
+  HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_2);
+  HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);
+  HAL_TIM_Base_Start_IT(&htim2); //pro kontrolu
+  HAL_TIM_Base_Start_IT(&htim17);
+  HAL_TIM_Base_Start_IT(&htim16);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	//HAL_StatusTypeDef s=HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 
-	spocitejPerioduTIM(&htim16);
 	while (1)
 	{
-		/*HAL_ADC_Start(&hadc1);
-		if (HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK)
-		{
-			adc_hod = HAL_ADC_GetValue(&hadc1);
-		}
-		HAL_ADC_Stop(&hadc1);*/
 		adc_hod=cti_ADC(&hadc1);
 		duty = dutyCycle(adc_hod, 1000);
 		updateDuty(duty);

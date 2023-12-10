@@ -177,15 +177,6 @@ void zmenSmer()
 	updateDuty(duty);
 }
 
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-	GPIO_PinState B1_old=HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
-	if ( B1_old== 1)
-	{
-		zmenSmer();
-	}
-}
-
 void dec_ascii(uint16_t dec, char ret[],uint8_t len)
 {
 	uint16_t temp = dec;

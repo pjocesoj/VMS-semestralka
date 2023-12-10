@@ -45,6 +45,7 @@
 *.pdb
 *.list
 *.cyclo
+*.mk
 
 # Kernel Module Compile Results
 *.mod*

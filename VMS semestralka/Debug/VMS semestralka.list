@@ -41,9 +41,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  18 .debug_macro  000210fc  00000000  00000000  0003b88e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line   00018c92  00000000  00000000  0005c98a  2**0
+ 19 .debug_line   00018c91  00000000  00000000  0005c98a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_str    000bfa42  00000000  00000000  0007561c  2**0
+ 20 .debug_str    000bfa42  00000000  00000000  0007561b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  21 .debug_frame  00004cfc  00000000  00000000  00135060  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
@@ -572,50 +572,51 @@ void zpracuj_ADC3(uint16_t val)
 
 	//uint16_t puls_new=HAL_ADC_GetValue(&hadc3);
 
-	if(val<600){puls_new=1;}
+	if(val>200){puls_new=1;}
  8000528:	88fb      	ldrh	r3, [r7, #6]
- 800052a:	f5b3 7f16 	cmp.w	r3, #600	; 0x258
- 800052e:	d203      	bcs.n	8000538 <zpracuj_ADC3+0x38>
- 8000530:	4b10      	ldr	r3, [pc, #64]	; (8000574 <zpracuj_ADC3+0x74>)
- 8000532:	2201      	movs	r2, #1
- 8000534:	801a      	strh	r2, [r3, #0]
- 8000536:	e002      	b.n	800053e <zpracuj_ADC3+0x3e>
+ 800052a:	2bc8      	cmp	r3, #200	; 0xc8
+ 800052c:	d903      	bls.n	8000536 <zpracuj_ADC3+0x36>
+ 800052e:	4b11      	ldr	r3, [pc, #68]	; (8000574 <zpracuj_ADC3+0x74>)
+ 8000530:	2201      	movs	r2, #1
+ 8000532:	801a      	strh	r2, [r3, #0]
+ 8000534:	e002      	b.n	800053c <zpracuj_ADC3+0x3c>
 	else {puls_new=0;}
- 8000538:	4b0e      	ldr	r3, [pc, #56]	; (8000574 <zpracuj_ADC3+0x74>)
- 800053a:	2200      	movs	r2, #0
- 800053c:	801a      	strh	r2, [r3, #0]
+ 8000536:	4b0f      	ldr	r3, [pc, #60]	; (8000574 <zpracuj_ADC3+0x74>)
+ 8000538:	2200      	movs	r2, #0
+ 800053a:	801a      	strh	r2, [r3, #0]
 
 	if(puls_old<puls_new)
- 800053e:	4b0e      	ldr	r3, [pc, #56]	; (8000578 <zpracuj_ADC3+0x78>)
- 8000540:	881a      	ldrh	r2, [r3, #0]
- 8000542:	4b0c      	ldr	r3, [pc, #48]	; (8000574 <zpracuj_ADC3+0x74>)
- 8000544:	881b      	ldrh	r3, [r3, #0]
- 8000546:	429a      	cmp	r2, r3
- 8000548:	d205      	bcs.n	8000556 <zpracuj_ADC3+0x56>
+ 800053c:	4b0e      	ldr	r3, [pc, #56]	; (8000578 <zpracuj_ADC3+0x78>)
+ 800053e:	881a      	ldrh	r2, [r3, #0]
+ 8000540:	4b0c      	ldr	r3, [pc, #48]	; (8000574 <zpracuj_ADC3+0x74>)
+ 8000542:	881b      	ldrh	r3, [r3, #0]
+ 8000544:	429a      	cmp	r2, r3
+ 8000546:	d205      	bcs.n	8000554 <zpracuj_ADC3+0x54>
 	{
 		pulsu++;
- 800054a:	4b0c      	ldr	r3, [pc, #48]	; (800057c <zpracuj_ADC3+0x7c>)
- 800054c:	881b      	ldrh	r3, [r3, #0]
- 800054e:	3301      	adds	r3, #1
- 8000550:	b29a      	uxth	r2, r3
- 8000552:	4b0a      	ldr	r3, [pc, #40]	; (800057c <zpracuj_ADC3+0x7c>)
- 8000554:	801a      	strh	r2, [r3, #0]
+ 8000548:	4b0c      	ldr	r3, [pc, #48]	; (800057c <zpracuj_ADC3+0x7c>)
+ 800054a:	881b      	ldrh	r3, [r3, #0]
+ 800054c:	3301      	adds	r3, #1
+ 800054e:	b29a      	uxth	r2, r3
+ 8000550:	4b0a      	ldr	r3, [pc, #40]	; (800057c <zpracuj_ADC3+0x7c>)
+ 8000552:	801a      	strh	r2, [r3, #0]
 	}
 
 	puls_old=puls_new;
- 8000556:	4b07      	ldr	r3, [pc, #28]	; (8000574 <zpracuj_ADC3+0x74>)
- 8000558:	881a      	ldrh	r2, [r3, #0]
- 800055a:	4b07      	ldr	r3, [pc, #28]	; (8000578 <zpracuj_ADC3+0x78>)
- 800055c:	801a      	strh	r2, [r3, #0]
+ 8000554:	4b07      	ldr	r3, [pc, #28]	; (8000574 <zpracuj_ADC3+0x74>)
+ 8000556:	881a      	ldrh	r2, [r3, #0]
+ 8000558:	4b07      	ldr	r3, [pc, #28]	; (8000578 <zpracuj_ADC3+0x78>)
+ 800055a:	801a      	strh	r2, [r3, #0]
 	adc3_old=val;
- 800055e:	4a08      	ldr	r2, [pc, #32]	; (8000580 <zpracuj_ADC3+0x80>)
- 8000560:	88fb      	ldrh	r3, [r7, #6]
- 8000562:	8013      	strh	r3, [r2, #0]
+ 800055c:	4a08      	ldr	r2, [pc, #32]	; (8000580 <zpracuj_ADC3+0x80>)
+ 800055e:	88fb      	ldrh	r3, [r7, #6]
+ 8000560:	8013      	strh	r3, [r2, #0]
 }
- 8000564:	bf00      	nop
- 8000566:	3708      	adds	r7, #8
- 8000568:	46bd      	mov	sp, r7
- 800056a:	bd80      	pop	{r7, pc}
+ 8000562:	bf00      	nop
+ 8000564:	3708      	adds	r7, #8
+ 8000566:	46bd      	mov	sp, r7
+ 8000568:	bd80      	pop	{r7, pc}
+ 800056a:	bf00      	nop
  800056c:	48001000 	.word	0x48001000
  8000570:	20000338 	.word	0x20000338
  8000574:	2000033c 	.word	0x2000033c

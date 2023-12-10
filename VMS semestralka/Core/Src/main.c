@@ -211,7 +211,7 @@ void zpracuj_ADC3(uint16_t val)
 
 	//uint16_t puls_new=HAL_ADC_GetValue(&hadc3);
 
-	if(val<600){puls_new=1;}
+	if(val>200){puls_new=1;}
 	else {puls_new=0;}
 
 	if(puls_old<puls_new)

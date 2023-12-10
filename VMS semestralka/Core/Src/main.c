@@ -20,6 +20,9 @@
 #include "main.h"
 #include "usb_device.h"
 
+#include "..\..\Helpers/monitor.h"
+#include "..\..\Helpers/GPIO_helper.h"
+#include "..\..\Helpers/USB_helper.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -68,14 +71,7 @@ typedef enum
 	DOPRAVA = 1,
 } SmerOtaceni;
 
-int tim16 = 0;
-int tim17 = 0;
-int tim2 = 0;
-int tim2_ch2 = 0;
-int tim2_ch4 = 0;
 
-uint16_t adc3_new = 0; //ADC3 raw hodnota
-uint16_t adc3_old = 0; //ADC3 v t-1
 uint8_t adc_comp=0;
 uint16_t puls_old=0;
 uint16_t puls_new=0;
@@ -84,7 +80,6 @@ uint16_t RPM=0;
 
 uint8_t adc_hod = 0; //ADC1 raw hodnota
 uint16_t duty = 0;
-float p = 0; //procenta (pro monitor)
 
 SmerOtaceni smer_otaceni = DOPRAVA;
 /* USER CODE END PFP */
@@ -95,45 +90,24 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if (htim == &htim17)
 	{
-		HAL_GPIO_TogglePin(LD10_GPIO_Port, LD10_Pin);
-		tim17 = HAL_GPIO_ReadPin(LD10_GPIO_Port, LD10_Pin);
+		//TIM17_monitor();
+		otocKruhem(smer_otaceni);
 	}
 	if (htim == &htim16)
 	{
-		HAL_GPIO_TogglePin(LD9_GPIO_Port, LD9_Pin);
-		tim16 = HAL_GPIO_ReadPin(LD10_GPIO_Port, LD10_Pin);
-		//tim16*=2000;
+		//TIM16_monitor();
 		RPM=pulsu;
 		pulsu=0;
 	}
 	if (htim == &htim2)
 	{
-		HAL_GPIO_TogglePin(LD8_GPIO_Port, LD8_Pin);
-		tim2 = HAL_GPIO_ReadPin(LD8_GPIO_Port, LD8_Pin);
-		tim2 += 9;
-
-		HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
-		tim2_ch2 = 1 + 3;
-		HAL_GPIO_TogglePin(LD6_GPIO_Port, LD6_Pin);
-		tim2_ch4 = 1 + 6;
+		//TIM2_monitor();
 	}
 }
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 {
-	if (htim == &htim2)
-	{
-		if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
-		{
-			HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
-			tim2_ch2 = 3;
-		}
-		if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4)
-		{
-			HAL_GPIO_TogglePin(LD6_GPIO_Port, LD6_Pin);
-			tim2_ch4 = 6;
-		}
-	}
+	//PWM_monitor(htim);
 }
 
 uint16_t dutyCycle(uint8_t adc, uint16_t period)
@@ -177,38 +151,8 @@ void zmenSmer()
 	updateDuty(duty);
 }
 
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
-{
-	GPIO_PinState B1_old=HAL_GPIO_ReadPin(B1_GPIO_Port, B1_Pin);
-	if ( B1_old== 1)
-	{
-		zmenSmer();
-	}
-}
-
-void dec_ascii(uint16_t dec, char ret[],uint8_t len)
-{
-	uint16_t temp = dec;
-	uint8_t a=0;
-	uint16_t rad = 1;
-
-	for(int i=1;i<len;i++){rad*=10;}
-
-	for(uint8_t i=0;i<len;i++)
-	{
-		a=temp/rad;
-		ret[i]=a+48;//48 = '0' v ASCII
-		temp=temp-a*rad;
-
-		rad/=10;
-	}
-}
-
 void zpracuj_ADC3(uint16_t val)
 {
-	HAL_GPIO_TogglePin(LD5_GPIO_Port, LD5_Pin);
-	adc_comp = HAL_GPIO_ReadPin(LD5_GPIO_Port, LD5_Pin)+12;
-
 	//uint16_t puls_new=HAL_ADC_GetValue(&hadc3);
 
 	if(val>200){puls_new=1;}
@@ -282,37 +226,33 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
-	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_2);
-	HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);
-	HAL_TIM_Base_Start_IT(&htim2); //pro kontrolu
-	HAL_TIM_Base_Start_IT(&htim17);
-	HAL_TIM_Base_Start_IT(&htim16);
+  defineKruh();
+  spocitejPerioduTIM(&htim16);
+
+  HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_2);
+  HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);
+  HAL_TIM_Base_Start_IT(&htim2); //pro kontrolu
+  HAL_TIM_Base_Start_IT(&htim17);
+  HAL_TIM_Base_Start_IT(&htim16);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	//HAL_StatusTypeDef s=HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 
-	spocitejPerioduTIM(&htim16);
+  uint16_t tim2_arr=__HAL_TIM_GET_AUTORELOAD(&htim2);
 	while (1)
 	{
-		/*HAL_ADC_Start(&hadc1);
-		if (HAL_ADC_PollForConversion(&hadc1, 10) == HAL_OK)
-		{
-			adc_hod = HAL_ADC_GetValue(&hadc1);
-		}
-		HAL_ADC_Stop(&hadc1);*/
 		adc_hod=cti_ADC(&hadc1);
-		duty = dutyCycle(adc_hod, 1000);
+		duty = dutyCycle(adc_hod, tim2_arr);
 		updateDuty(duty);
 
 		adc3_new=cti_ADC(&hadc3);
 		zpracuj_ADC3(adc3_new);
 
-		char bufferADC[4]={1,1,1,1};
+		char bufferADC[4]={0};
 		dec_ascii(adc_hod, bufferADC,4);
 		uint8_t bufferADC_[6]={bufferADC[0],bufferADC[1],bufferADC[2],bufferADC[3],'\r','\n'};
-		//uint8_t bufferADC_[5]="ABC\r\n";
 		CDC_Transmit_FS(bufferADC_,strlen(bufferADC_));
 
     /* USER CODE END WHILE */

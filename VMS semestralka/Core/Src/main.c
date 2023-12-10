@@ -121,6 +121,10 @@ uint16_t dutyCycle(uint8_t adc, uint16_t period)
 
 	float proc = val / max;
 	p = proc * 100;
+
+	uint16_t pr=1000-(proc*900);//100%=100 1%=1000
+	__HAL_TIM_SET_AUTORELOAD(&htim17,pr);
+
 	return proc * period;
 }
 

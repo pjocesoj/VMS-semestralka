@@ -10,6 +10,9 @@ int tim2 = 0;
 int tim2_ch2 = 0;
 int tim2_ch4 = 0;
 
+//PWM
+float p = 0; //procenta (pro monitor)
+
 //mereni otacek
 uint16_t adc3_new = 0; //ADC3 raw hodnota
 uint16_t adc3_old = 0; //ADC3 v t-1

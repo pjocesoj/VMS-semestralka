@@ -80,7 +80,6 @@ uint16_t RPM=0;
 
 uint8_t adc_hod = 0; //ADC1 raw hodnota
 uint16_t duty = 0;
-float p = 0; //procenta (pro monitor)
 
 SmerOtaceni smer_otaceni = DOPRAVA;
 /* USER CODE END PFP */
@@ -241,19 +240,19 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	//HAL_StatusTypeDef s=HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
 
+  uint16_t tim2_arr=__HAL_TIM_GET_AUTORELOAD(&htim2);
 	while (1)
 	{
 		adc_hod=cti_ADC(&hadc1);
-		duty = dutyCycle(adc_hod, 1000);
+		duty = dutyCycle(adc_hod, tim2_arr);
 		updateDuty(duty);
 
 		adc3_new=cti_ADC(&hadc3);
 		zpracuj_ADC3(adc3_new);
 
-		char bufferADC[4]={1,1,1,1};
+		char bufferADC[4]={0};
 		dec_ascii(adc_hod, bufferADC,4);
 		uint8_t bufferADC_[6]={bufferADC[0],bufferADC[1],bufferADC[2],bufferADC[3],'\r','\n'};
-		//uint8_t bufferADC_[5]="ABC\r\n";
 		CDC_Transmit_FS(bufferADC_,strlen(bufferADC_));
 
     /* USER CODE END WHILE */

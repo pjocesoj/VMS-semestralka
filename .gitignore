@@ -68,3 +68,6 @@ ctrlp.root
 
 #html
 *.html
+
+VMS semestralka/Debug/Core/Src/main.cyclo
+VMS semestralka/Debug/VMS semestralka.list

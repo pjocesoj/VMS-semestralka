@@ -110,6 +110,19 @@ void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 	//PWM_monitor(htim);
 }
 
+void zmenRychlost(TIM_HandleTypeDef *htim, float proc)
+{
+	uint16_t ctr_old=__HAL_TIM_GET_COUNTER(&htim17);
+
+	uint16_t pr=1000-(proc*900);//100%=100 1%=1000
+	__HAL_TIM_SET_AUTORELOAD(&htim17,pr);
+
+	if(pr<ctr_old)//kdyz zmenim ve spatny okamzik tak pocita do 65k
+	{
+		__HAL_TIM_SET_COUNTER(&htim17,0);
+	}
+}
+
 uint16_t dutyCycle(uint8_t adc, uint16_t period)
 {
 	uint8_t min = 211;
@@ -122,8 +135,7 @@ uint16_t dutyCycle(uint8_t adc, uint16_t period)
 	float proc = val / max;
 	p = proc * 100;
 
-	uint16_t pr=1000-(proc*900);//100%=100 1%=1000
-	__HAL_TIM_SET_AUTORELOAD(&htim17,pr);
+	zmenRychlost(&htim17,proc);
 
 	return proc * period;
 }

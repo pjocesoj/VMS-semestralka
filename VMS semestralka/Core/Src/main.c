@@ -77,6 +77,7 @@ uint16_t puls_old=0;
 uint16_t puls_new=0;
 uint16_t pulsu=0;
 uint16_t RPM=0;
+uint16_t tim16_Hz=0;
 
 uint8_t adc_hod = 0; //ADC1 raw hodnota
 uint16_t duty = 0;
@@ -96,7 +97,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim == &htim16)
 	{
 		//TIM16_monitor();
-		RPM=pulsu;
+		uint32_t RPM_t=(pulsu*tim16_Hz*60);
+		RPM=RPM_t/6;
 		pulsu=0;
 	}
 	if (htim == &htim2)
@@ -202,7 +204,7 @@ uint16_t cti_ADC(ADC_HandleTypeDef* hadc)
 
 	return ret;
 }
-void spocitejPerioduTIM(TIM_HandleTypeDef* htim)
+uint16_t spocitejPerioduTIM(TIM_HandleTypeDef* htim)
 {
 	uint32_t APB2=HAL_RCC_GetPCLK2Freq();
 	//uint32_t tim16_psc=&htim16.Instance->PSC; //z nejakeho duvodu vrací jinou hodnotu než debug
@@ -210,6 +212,7 @@ void spocitejPerioduTIM(TIM_HandleTypeDef* htim)
 	uint32_t arr=__HAL_TIM_GET_AUTORELOAD(htim);
 
 	uint32_t speed=APB2/((psc+1)*(arr+1));//Hz
+	return speed;
 }
 /* USER CODE END 0 */
 
@@ -250,7 +253,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   defineKruh();
-  spocitejPerioduTIM(&htim16);
+  tim16_Hz=spocitejPerioduTIM(&htim16);
 
   HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_2);
   HAL_TIM_PWM_Start_IT(&htim2, TIM_CHANNEL_4);

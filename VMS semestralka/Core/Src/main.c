@@ -276,10 +276,11 @@ int main(void)
 		adc3_new=cti_ADC(&hadc3);
 		zpracuj_ADC3(adc3_new);
 
-		char bufferADC[4]={0};
+		/*char bufferADC[4]={0};
 		dec_ascii(adc_hod, bufferADC,4);
 		uint8_t bufferADC_[6]={bufferADC[0],bufferADC[1],bufferADC[2],bufferADC[3],'\r','\n'};
-		CDC_Transmit_FS(bufferADC_,strlen(bufferADC_));
+		CDC_Transmit_FS(bufferADC_,strlen(bufferADC_));*/
+		posliUSB(adc_hod,RPM);
 
     /* USER CODE END WHILE */
 

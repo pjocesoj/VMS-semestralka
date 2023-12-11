@@ -125,7 +125,14 @@ void zmenRychlost(TIM_HandleTypeDef *htim, float proc)
 
 uint16_t dutyCycle(uint8_t adc, uint16_t period)
 {
-	uint8_t min = 211;
+	uint8_t nula = 211;
+	if(adc<=213)
+	{
+		p=0;
+		return 0;
+	}
+
+	uint8_t min = 170;//nula-2*(255-211)
 	float max = 255 - min;
 	float val = adc - min;
 
@@ -481,7 +488,7 @@ static void MX_TIM2_Init(void)
   htim2.Instance = TIM2;
   htim2.Init.Prescaler = 48000-1;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 1000;
+  htim2.Init.Period = 10-1;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)

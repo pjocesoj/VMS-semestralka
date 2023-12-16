@@ -100,6 +100,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		uint32_t RPM_t=(pulsu*tim16_Hz*60);
 		RPM=RPM_t/6;
 		pulsu=0;
+
+		posliUSB(adc_hod,RPM);
 	}
 	if (htim == &htim2)
 	{
@@ -280,7 +282,7 @@ int main(void)
 		dec_ascii(adc_hod, bufferADC,4);
 		uint8_t bufferADC_[6]={bufferADC[0],bufferADC[1],bufferADC[2],bufferADC[3],'\r','\n'};
 		CDC_Transmit_FS(bufferADC_,strlen(bufferADC_));*/
-		posliUSB(adc_hod,RPM);
+		//posliUSB(adc_hod,RPM);
 
     /* USER CODE END WHILE */
 
